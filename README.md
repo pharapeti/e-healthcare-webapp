@@ -1,6 +1,6 @@
 # e-healthcare-webapp
 
-## Contributiors:
+## Contributors also known as Team 6:
 * Patrice Harapeti
 * Steven Zacherl
 * Johan Do
