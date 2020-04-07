@@ -13,6 +13,7 @@ pickle-email-*.html
 .idea
 .generators
 .rakeTasks
+.pryrc
 
 # Ignore all logfiles and tempfiles.
 /log/*
