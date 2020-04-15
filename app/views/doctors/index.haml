@@ -1,0 +1,23 @@
+.row
+  .col-12.col-md-3
+    .mb-3
+      = link_to 'Do action', new_doctor_path, class: "btn btn-primary"
+    %ul.nav.flex-column
+      %li.nav-item
+        %a.nav-link.active{:href => "#"} Active
+      %li.nav-item
+        %a.nav-link{:href => "#"} Link
+      %li.nav-item
+        %a.nav-link{:href => "#"} Link
+      %li.nav-item
+        %a.nav-link.disabled{"aria-disabled" => "true", :href => "#", :tabindex => "-1"} Disabled
+
+  .col
+    .alert.alert-primary
+      %h4.alert-heading
+        Welcome to the RailsChatTutorial!
+      %p
+        We need to talk.
+      %hr/
+      %p
+        You can create or join a room from the sidebar.
