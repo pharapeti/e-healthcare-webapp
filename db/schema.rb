@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_125545) do
+ActiveRecord::Schema.define(version: 2020_04_26_134924) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,6 +110,13 @@ ActiveRecord::Schema.define(version: 2020_04_26_125545) do
     t.index ["directed_to_id"], name: "index_questions_on_directed_to_id"
   end
 
+  create_table "transcripts", force: :cascade do |t|
+    t.integer "chat_room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_room_id"], name: "index_transcripts_on_chat_room_id"
+  end
+
   create_table "urgent_requests", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.text "description"
@@ -147,5 +154,6 @@ ActiveRecord::Schema.define(version: 2020_04_26_125545) do
   add_foreign_key "patients", "users"
   add_foreign_key "questions", "created_bies"
   add_foreign_key "questions", "directed_tos"
+  add_foreign_key "transcripts", "chat_rooms"
   add_foreign_key "urgent_requests", "patients"
 end
