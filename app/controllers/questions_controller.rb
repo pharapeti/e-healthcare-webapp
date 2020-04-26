@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.where(created_by_id: Patient.find_by(user_id: current_user.id))
   end
 
   # GET /questions/1
