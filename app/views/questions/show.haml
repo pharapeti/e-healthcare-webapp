@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Created by:
+  = @question.created_by
+%p
+  %b Directed to:
+  = @question.directed_to
+%p
+  %b Description:
+  = @question.description
+
+= link_to 'Edit', edit_question_path(@question)
+\|
+= link_to 'Back', questions_path

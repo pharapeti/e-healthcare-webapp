@@ -1,13 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   created_by: one
-  description: MyText
   directed_to: one
+  description: MyText
 
 two:
-  id: 1
   created_by: two
-  description: MyText
   directed_to: two
+  description: MyText
