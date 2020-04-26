@@ -1,0 +1,22 @@
+= form_for @consulation_request do |f|
+  - if @consulation_request.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@consulation_request.errors.count, "error")} prohibited this consulation_request from being saved:"
+      %ul
+        - @consulation_request.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :patient
+    = f.text_field :patient
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :directed_to
+    = f.text_field :directed_to
+  .field
+    = f.label :scheduled_for
+    = f.datetime_select :scheduled_for
+  .actions
+    = f.submit 'Save'

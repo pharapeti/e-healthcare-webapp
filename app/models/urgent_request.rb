@@ -1,0 +1,2 @@
+class UrgentRequest < Request
+end

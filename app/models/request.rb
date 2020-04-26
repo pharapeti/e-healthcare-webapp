@@ -1,4 +1,4 @@
-class Request < ApplicationRecord
+class Request < ApplicationController
   belongs_to :patient
-  has_one_attachment :media
+  has_one_attached :media
 end

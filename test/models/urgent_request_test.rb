@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RequestTest < ActiveSupport::TestCase
+class UrgentRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

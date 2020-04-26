@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Patient:
+  = @consulation_request.patient
+%p
+  %b Description:
+  = @consulation_request.description
+%p
+  %b Directed to:
+  = @consulation_request.directed_to
+%p
+  %b Scheduled for:
+  = @consulation_request.scheduled_for
+
+= link_to 'Edit', edit_consulation_request_path(@consulation_request)
+\|
+= link_to 'Back', consulation_requests_path

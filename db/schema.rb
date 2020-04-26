@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_104004) do
+ActiveRecord::Schema.define(version: 2020_04_26_111831) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 2020_04_26_104004) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answered_by_id"], name: "index_answers_on_answered_by_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "consulation_requests", force: :cascade do |t|
+    t.integer "patient_id", null: false
+    t.text "description"
+    t.integer "directed_to_id", null: false
+    t.datetime "scheduled_for"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["directed_to_id"], name: "index_consulation_requests_on_directed_to_id"
+    t.index ["patient_id"], name: "index_consulation_requests_on_patient_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -78,6 +89,14 @@ ActiveRecord::Schema.define(version: 2020_04_26_104004) do
     t.index ["directed_to_id"], name: "index_questions_on_directed_to_id"
   end
 
+  create_table "urgent_requests", force: :cascade do |t|
+    t.integer "patient_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_urgent_requests_on_patient_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,9 +114,12 @@ ActiveRecord::Schema.define(version: 2020_04_26_104004) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "answered_bies"
   add_foreign_key "answers", "questions"
+  add_foreign_key "consulation_requests", "directed_tos"
+  add_foreign_key "consulation_requests", "patients"
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"
   add_foreign_key "questions", "created_bies"
   add_foreign_key "questions", "directed_tos"
+  add_foreign_key "urgent_requests", "patients"
 end

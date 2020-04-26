@@ -1,0 +1,27 @@
+%h1 Listing consulation_requests
+
+%table
+  %thead
+    %tr
+      %th Patient
+      %th Description
+      %th Directed to
+      %th Scheduled for
+      %th
+      %th
+      %th
+
+  %tbody
+    - @consulation_requests.each do |consulation_request|
+      %tr
+        %td= consulation_request.patient
+        %td= consulation_request.description
+        %td= consulation_request.directed_to
+        %td= consulation_request.scheduled_for
+        %td= link_to 'Show', consulation_request
+        %td= link_to 'Edit', edit_consulation_request_path(consulation_request)
+        %td= link_to 'Destroy', consulation_request, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Consulation request', new_consulation_request_path

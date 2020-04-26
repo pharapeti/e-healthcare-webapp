@@ -1,0 +1,16 @@
+= form_for @urgent_request do |f|
+  - if @urgent_request.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@urgent_request.errors.count, "error")} prohibited this urgent_request from being saved:"
+      %ul
+        - @urgent_request.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :patient
+    = f.text_field :patient
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit 'Save'

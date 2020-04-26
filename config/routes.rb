@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :requests
+  resources :urgent_requests
+  resources :consulation_requests
   resources :questions
   resources :answers
   resources :practices

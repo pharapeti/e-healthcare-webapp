@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Patient:
+  = @urgent_request.patient
+%p
+  %b Description:
+  = @urgent_request.description
+
+= link_to 'Edit', edit_urgent_request_path(@urgent_request)
+\|
+= link_to 'Back', urgent_requests_path
