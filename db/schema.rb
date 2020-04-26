@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_103258) do
+ActiveRecord::Schema.define(version: 2020_04_26_101532) do
 
   create_table "doctors", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 2020_04_15_103258) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "created_by_id", null: false
+    t.text "description"
+    t.integer "directed_to_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_questions_on_created_by_id"
+    t.index ["directed_to_id"], name: "index_questions_on_directed_to_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -54,4 +64,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_103258) do
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"
+  add_foreign_key "questions", "created_bies"
+  add_foreign_key "questions", "directed_tos"
 end
