@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_101532) do
+ActiveRecord::Schema.define(version: 2020_04_26_102329) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "answered_by_id", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answered_by_id"], name: "index_answers_on_answered_by_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "doctors", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -61,6 +71,8 @@ ActiveRecord::Schema.define(version: 2020_04_26_101532) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "answers", "answered_bies"
+  add_foreign_key "answers", "questions"
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"
