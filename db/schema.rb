@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_124933) do
+ActiveRecord::Schema.define(version: 2020_04_26_125545) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 2020_04_26_124933) do
 
   create_table "chat_messages", force: :cascade do |t|
     t.integer "chat_room_id", null: false
-    t.integer "sent_by_id", null: false
+    t.integer "user_id", null: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_room_id"], name: "index_chat_messages_on_chat_room_id"
-    t.index ["sent_by_id"], name: "index_chat_messages_on_sent_by_id"
+    t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_124933) do
   add_foreign_key "answers", "answered_bies"
   add_foreign_key "answers", "questions"
   add_foreign_key "chat_messages", "chat_rooms"
-  add_foreign_key "chat_messages", "sent_bies"
+  add_foreign_key "chat_messages", "users"
   add_foreign_key "chat_rooms", "doctors"
   add_foreign_key "chat_rooms", "patients"
   add_foreign_key "chat_rooms", "requests"

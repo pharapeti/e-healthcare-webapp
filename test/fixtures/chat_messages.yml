@@ -2,10 +2,10 @@
 
 one:
   chat_room: one
-  sent_by: one
+  user: one
   message: MyText
 
 two:
   chat_room: two
-  sent_by: two
+  user: two
   message: MyText

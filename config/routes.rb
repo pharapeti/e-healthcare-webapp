@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :chat_messages
   resources :chat_rooms
+  resources :chat_messages
   resources :urgent_requests
   resources :consulation_requests
   resources :questions
