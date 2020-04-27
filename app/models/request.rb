@@ -4,4 +4,6 @@ class Request < ApplicationRecord
   belongs_to :patient
   has_many :chat_rooms
   has_one_attached :media
+
+  validates_presence_of :patient
 end
