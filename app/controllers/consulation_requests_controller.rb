@@ -1,5 +1,20 @@
 class ConsulationRequestsController < RequestsController
+  layout 'patients/patients'
   before_action :set_consulation_request, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @consulation_requests = ConsulationRequest.where(patient: current_user.patient )
+  end
+
+  def show
+  end
+
+  def new
+    @consulation_request = ConsulationRequest.new(patient: current_user.patient)
+  end
+
+  def create
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

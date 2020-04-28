@@ -13,6 +13,6 @@
   %b Scheduled for:
   = @consulation_request.scheduled_for
 
-= link_to 'Edit', edit_consulation_request_path(@consulation_request)
+= link_to 'Edit', edit_patient_consulation_request_path(@consulation_request)
 \|
-= link_to 'Back', consulation_requests_path
+= link_to 'Back', patient_consulation_requests_path(current_user.patient)

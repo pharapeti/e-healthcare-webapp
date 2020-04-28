@@ -1,4 +1,4 @@
-= form_for @consulation_request do |f|
+= simple_form_for @consulation_request, url: patient_consulation_requests_path do |f|
   - if @consulation_request.errors.any?
     #error_explanation
       %h2= "#{pluralize(@consulation_request.errors.count, "error")} prohibited this consulation_request from being saved:"

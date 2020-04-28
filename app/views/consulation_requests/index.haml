@@ -1,4 +1,4 @@
-%h1 Listing consulation_requests
+%h3 My Consulation Requests
 
 %table
   %thead
@@ -24,4 +24,4 @@
 
 %br
 
-= link_to 'New Consulation request', new_consulation_request_path
+= link_to 'New Consulation request', new_patient_consulation_request_path(current_user.patient)

@@ -4,15 +4,16 @@ Rails.application.routes.draw do
   resources :chat_rooms
   resources :chat_messages
   resources :urgent_requests
-  resources :consulation_requests
   resources :transcripts
-  resources :questions
   resources :answers
   resources :practices
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'
     get :profile
+
+    resources :questions
+    resources :consulation_requests
     root to: 'patients#index'
   end
 
