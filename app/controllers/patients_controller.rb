@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  layout 'patients'
+  layout 'patients/patients'
 
   before_action :load_patient
 

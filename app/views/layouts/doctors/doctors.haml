@@ -18,6 +18,9 @@
         - else
           = render 'shared/navigation_bar'
           = yield :header
-
-      .container#content
-        = yield
+      
+      .d-flex#wrapper
+        - if user_signed_in?
+          = render partial: 'layouts/doctors/sidebar'
+        .col-8
+          = yield

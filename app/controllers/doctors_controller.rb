@@ -1,5 +1,5 @@
 class DoctorsController < ApplicationController
-  layout 'doctors'
+  layout 'doctors/doctors'
 
   before_action :load_doctor
 
@@ -10,6 +10,13 @@ class DoctorsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    binding.pry
   end
 
   def profile
