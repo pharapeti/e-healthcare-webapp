@@ -1,4 +1,4 @@
-= form_for @question, url: patient_questions_path do |f|
+= bootstrap_form_for @question, url: patient_questions_path do |f|
   - if @question.errors.any?
     #error_explanation
       %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
@@ -7,13 +7,10 @@
           %li= message
 
   .field
-    = f.label :media
-    = f.file_field :media
+    = f.file_field :media, required: false
   .field
-    = f.label :directed_to_id
-    = f.text_field :directed_to_id
+    = f.text_field :directed_to_id, required: true
   .field
-    = f.label :description
-    = f.text_area :description
+    = f.text_area :description, required: true
   .actions
     = f.submit 'Submit question', class: 'btn-primary'

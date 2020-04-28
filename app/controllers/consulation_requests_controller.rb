@@ -14,6 +14,18 @@ class ConsulationRequestsController < RequestsController
   end
 
   def create
+    @consulation_request = ConsulationRequest.new(consulation_request_params)
+    @consulation_request.patient = current_user.patient
+
+    respond_to do |format|
+      if @consulation_request.save
+        format.html { redirect_to @consulation_request, notice: 'Booking successful.' }
+        format.json { render :show, status: :created, location: @consulation_request }
+      else
+        format.html { render :new }
+        format.json { render json: @consulation_request.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -24,6 +36,6 @@ class ConsulationRequestsController < RequestsController
 
     # Only allow a list of trusted parameters through.
     def consulation_request_params
-      params.require(:consulation_request).permit(:patient_id, :description, :directed_to_id, :scheduled_for, :media)
+      params.require(:consulation_request).permit(:description, :directed_to_id, :scheduled_for, :media)
     end
 end

@@ -1,6 +1,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import  "../node_modules/bootstrap/scss/bootstrap";
 @import "rails-chat-tutorial";
+@import "rails_bootstrap_forms";
 
 body {
   overflow-x: hidden;

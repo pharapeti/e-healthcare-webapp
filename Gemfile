@@ -26,6 +26,7 @@ gem 'cancan'
 # gem 'jquery-rails'
 gem 'simple_form'
 gem 'coffee-rails'
+gem "bootstrap_form", "~> 4.0"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
