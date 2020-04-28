@@ -7,7 +7,7 @@ class StaticController < ApplicationController
     elsif current_user.patient.present?
       redirect_to patient_dashboard_path(current_user.patient)
     elsif current_user.doctor.present?
-      redirect_to doctors_dashboard_path
+      redirect_to doctor_dashboard_path(current_user.doctor)
     end
   end
 end
