@@ -1,6 +1,5 @@
 class DoctorsController < ApplicationController
   layout 'doctors/doctors'
-
   before_action :load_doctor
 
   def dashboard

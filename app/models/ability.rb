@@ -8,9 +8,9 @@ class Ability
 
     cannot :manage, :all
     if user.patient?
-      can :manage, [Question]
+      can :manage, [Patient, Question]
     elsif user.doctor?
-      can :manage, [Answer]
+      can :manage, [Doctor, Answer]
     end
   end
 end

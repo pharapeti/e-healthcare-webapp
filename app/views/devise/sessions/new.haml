@@ -5,5 +5,6 @@
     = f.input :password, required: false, input_html: { autocomplete: "current-password" }
     = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
   .form-actions
-    = f.button :submit, "Log in"
+    = f.button :submit, "Log in", class: 'btn-primary'
+  %br
 = render "devise/shared/links"
