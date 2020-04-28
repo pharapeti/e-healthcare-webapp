@@ -6,5 +6,5 @@ class Doctor < ApplicationRecord
   has_many :answers, foreign_key: 'answered_by_id'
   has_many :chat_rooms
 
-  validates_presence_of :user, :practice, :license_activation
+  validates_presence_of :practice, :license_activation
 end

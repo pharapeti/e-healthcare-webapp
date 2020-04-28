@@ -9,4 +9,7 @@
     = f.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" }
   .form-actions
     = f.button :submit, "Sign up", class: 'btn btn-success'
+
+= link_to 'Sign up as a patient', patient_registration_path
+= link_to 'Sign up as a Doctor', doctor_registration_path
 = render "devise/shared/links"
