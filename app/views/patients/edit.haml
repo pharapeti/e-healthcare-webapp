@@ -1,12 +1,12 @@
 %h2
   Update Profile
-= simple_form_for(@doctor) do |f|
+= simple_form_for(@patient) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
   
   .form-inputs
-  = f.input :license_number
-  = f.input :practice_id
+  -#= f.input :license_number
+  -#= f.input :practice_id
   .form-actions
     = link_to "Back", :back, class: 'btn btn-danger'
     = f.button :submit, class: 'btn-primary'

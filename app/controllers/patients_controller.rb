@@ -12,6 +12,12 @@ class PatientsController < ApplicationController
   def show
   end
 
+  def profile
+  end
+
+  def edit
+  end
+
   private
 
   def load_patient
