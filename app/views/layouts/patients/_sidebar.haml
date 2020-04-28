@@ -2,7 +2,7 @@
   .list-group.list-group-flush
     %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Home
     %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Consulations
-    %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Questions
+    = link_to 'Question', questions_path, class: 'list-group-item list-group-item-action bg-light'
     %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Subscriptions
     %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Transcripts
 

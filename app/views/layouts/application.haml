@@ -14,7 +14,10 @@
     .page#container
       .header.no-print#header
         - if user_signed_in?
-          = render partial: 'layouts/doctors/navbar'
+          - if current_user.patient.present?
+            = render partial: 'layouts/patients/navbar'
+          - else
+            = render partial: 'layouts/doctors/navbar'
         - else
           = render 'shared/navigation_bar'
           = yield :header

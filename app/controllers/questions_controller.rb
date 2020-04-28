@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.where(created_by_id: Patient.find_by(user_id: current_user.id))
+    @questions = Question.where(created_by: Patient.find_by(user_id: current_user.id))
   end
 
   # GET /questions/1
@@ -25,6 +25,9 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    @question.created_by = current_user.patient
+    @question.directed_to = Doctor.find(question_params[:directed_to_id]) if question_params[:directed_to_id]
+    binding.pry
 
     respond_to do |format|
       if @question.save
