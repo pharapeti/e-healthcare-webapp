@@ -13,5 +13,5 @@ patient = Patient.create(user: patient_user)
 practice = Practice.create(name: 'MyHealth Co', phone: '98025833', address: '42 Wallaby Way, Sydney')
 doctor = Doctor.create(user: doctor_user, license_number: 'KLJ45', practice: practice)
 
-question = Question.create(created_by_id: patient, directed_to_id: doctor, description: 'How do I clean my ears?')
-answer = Answer.create(question: question, answered_by_id: doctor, description: 'Use some earbuds mate')
+question = Question.create(created_by: patient, directed_to: doctor, description: 'How do I clean my ears?')
+answer = Answer.create(question: question, answered_by: doctor, description: 'Use some earbuds mate')

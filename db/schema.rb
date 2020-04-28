@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_134924) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "answers", "answered_bies"
+  add_foreign_key "answers", "doctors", column: "answered_by_id"
   add_foreign_key "answers", "questions"
   add_foreign_key "chat_messages", "chat_rooms"
   add_foreign_key "chat_messages", "users"
@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(version: 2020_04_26_134924) do
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"
-  add_foreign_key "questions", "created_bies"
-  add_foreign_key "questions", "directed_tos"
+  add_foreign_key "questions", "doctors", column: "directed_to_id"
+  add_foreign_key "questions", "patients", column: "created_by_id"
   add_foreign_key "transcripts", "chat_rooms"
   add_foreign_key "urgent_requests", "patients"
 end
