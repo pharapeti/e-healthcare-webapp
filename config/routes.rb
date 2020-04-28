@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :transcripts
   resources :answers
   resources :practices
+  resources :license_activations
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'

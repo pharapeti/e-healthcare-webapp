@@ -1,0 +1,2 @@
+module LicenseActivationsHelper
+end
