@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   layout 'patients/patients'
 
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient
 
   # GET /questions
   # GET /questions.json
@@ -67,6 +68,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def set_patient
+    @patient = current_user.patient
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_question

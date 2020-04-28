@@ -15,9 +15,9 @@
         %td= urgent_request.patient
         %td= urgent_request.description
         %td= link_to 'Show', urgent_request
-        %td= link_to 'Edit', edit_urgent_request_path(urgent_request)
+        %td= link_to 'Edit', edit_patient_urgent_request_path(urgent_request)
         %td= link_to 'Destroy', urgent_request, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Urgent request', new_urgent_request_path
+= link_to 'New Urgent request', new_patient_urgent_request_path(@patient)

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   resources :chat_rooms
   resources :chat_messages
-  resources :urgent_requests
   resources :transcripts
   resources :answers
   resources :practices
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
 
     resources :questions
     resources :consulation_requests
+    resources :urgent_requests
     root to: 'patients#index'
   end
 
