@@ -12,11 +12,13 @@ Rails.application.routes.draw do
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'
+    get :profile
     root to: 'patients#index'
   end
 
   resources :doctors do
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
+    get :profile
     root to: 'doctors#index'
   end
 

@@ -12,6 +12,9 @@ class DoctorsController < ApplicationController
   def show
   end
 
+  def profile
+  end
+
   private
 
   def load_doctor

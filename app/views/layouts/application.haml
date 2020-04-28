@@ -9,9 +9,11 @@
     = stylesheet_pack_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   %body
-    .container
-      .row
-        .col-12
-          = render partial: 'shared/navigation_bar'
-        .my-3
+    .d-flex#wrapper
+      = render partial: 'shared/sidebar'
+
+      #page-content-wrapper
+        = render partial: 'shared/navigation_bar'
+        
+        .container-fluid.m-2
           = yield
