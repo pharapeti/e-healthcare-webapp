@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2020_04_26_134924) do
 
   create_table "consulation_requests", force: :cascade do |t|
     t.integer "patient_id", null: false
-    t.text "description"
     t.integer "directed_to_id", null: false
+    t.text "description"
     t.datetime "scheduled_for"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_134924) do
   add_foreign_key "chat_rooms", "doctors"
   add_foreign_key "chat_rooms", "patients"
   add_foreign_key "chat_rooms", "requests"
-  add_foreign_key "consulation_requests", "directed_tos"
+  add_foreign_key "consulation_requests", "doctors", column: "directed_to_id"
   add_foreign_key "consulation_requests", "patients"
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
