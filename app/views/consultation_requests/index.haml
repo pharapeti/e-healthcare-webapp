@@ -1,0 +1,27 @@
+%h3 My Consultation Requests
+
+%table
+  %thead
+    %tr
+      %th Patient
+      %th Description
+      %th Directed to
+      %th Scheduled for
+      %th
+      %th
+      %th
+
+  %tbody
+    - @consultation_requests.each do |consultation_request|
+      %tr
+        %td= consultation_request.patient
+        %td= consultation_request.description
+        %td= consultation_request.directed_to
+        %td= consultation_request.scheduled_for
+        %td= link_to 'Show', consultation_request
+        %td= link_to 'Edit', edit_consultation_request_path(consultation_request)
+        %td= link_to 'Destroy', consultation_request, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Consultation request', new_patient_consultation_request_path(current_user.patient)
