@@ -54,25 +54,27 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
   end
 
   create_table "chat_rooms", force: :cascade do |t|
-    t.integer "request_id", null: false
+    t.integer "urgent_request_id"
+    t.integer "consultation_request_id"
     t.integer "patient_id", null: false
     t.integer "doctor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["consultation_request_id"], name: "index_chat_rooms_on_consultation_request_id"
     t.index ["doctor_id"], name: "index_chat_rooms_on_doctor_id"
     t.index ["patient_id"], name: "index_chat_rooms_on_patient_id"
-    t.index ["request_id"], name: "index_chat_rooms_on_request_id", unique: true
+    t.index ["urgent_request_id"], name: "index_chat_rooms_on_urgent_request_id"
   end
 
-  create_table "consulation_requests", force: :cascade do |t|
+  create_table "consultation_requests", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "directed_to_id", null: false
     t.text "description"
     t.datetime "scheduled_for"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["directed_to_id"], name: "index_consulation_requests_on_directed_to_id"
-    t.index ["patient_id"], name: "index_consulation_requests_on_patient_id"
+    t.index ["directed_to_id"], name: "index_consultation_requests_on_directed_to_id"
+    t.index ["patient_id"], name: "index_consultation_requests_on_patient_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -154,11 +156,12 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
   add_foreign_key "answers", "questions"
   add_foreign_key "chat_messages", "chat_rooms"
   add_foreign_key "chat_messages", "users"
+  add_foreign_key "chat_rooms", "consultation_requests"
   add_foreign_key "chat_rooms", "doctors"
   add_foreign_key "chat_rooms", "patients"
-  add_foreign_key "chat_rooms", "requests"
-  add_foreign_key "consulation_requests", "doctors", column: "directed_to_id"
-  add_foreign_key "consulation_requests", "patients"
+  add_foreign_key "chat_rooms", "urgent_requests"
+  add_foreign_key "consultation_requests", "doctors", column: "directed_to_id"
+  add_foreign_key "consultation_requests", "patients"
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"

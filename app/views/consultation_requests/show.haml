@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Patient:
+  = @consultation_request.patient
+%p
+  %b Description:
+  = @consultation_request.description
+%p
+  %b Directed to:
+  = @consultation_request.directed_to
+%p
+  %b Scheduled for:
+  = @consultation_request.scheduled_for
+
+= link_to 'Edit', edit_patient_consultation_request_path(@consultation_request)
+\|
+= link_to 'Back', patient_consultation_requests_path(current_user.patient)
