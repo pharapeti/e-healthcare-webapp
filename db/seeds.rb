@@ -10,10 +10,9 @@ patient_user = User.create(email: 'patient@example.com', username: 'patient99', 
 doctor_user = User.create(email: 'doctor@example.com', username: 'doctor01', password: '123456', password_confirmation: '123456')
 patient = Patient.create(user: patient_user)
 
-redeemed_license_activation = LicenseActivation.create(license_number: 'KLJ45', code: 'xyz123', redeemed: true, redeemed_at: 1.week.ago)
-valid_license_action = LicenseActivation.create(license_number: 'JBL999', code: 'abc123')
-
 practice = Practice.create(name: 'MyHealth Co', phone: '98025833', address: '42 Wallaby Way, Sydney')
+redeemed_license_activation = LicenseActivation.create(license_number: 'KLJ45', code: 'xyz123', redeemed: true, redeemed_at: 1.week.ago, practice: practice)
+valid_license_action = LicenseActivation.create(license_number: 'JBL999', code: 'abc123', practice: practice)
 doctor = Doctor.create(user: doctor_user, license_activation: redeemed_license_activation, practice: practice)
 
 question = Question.create(created_by: patient, directed_to: doctor, description: 'How do I clean my ears?')

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
-
+  devise_for :users, controllers: { registrations: "registrations" }
   devise_scope :users do
     get 'patients/register', to: 'patients/patient_registration#new', as: 'patient_registration'
     post 'patients/register', to: 'patients/patient_registration#create'

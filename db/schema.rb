@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_134040) do
+ActiveRecord::Schema.define(version: 2020_04_29_131029) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
   end
 
   create_table "doctors", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "practice_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
     t.datetime "redeemed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "practice_id"
+    t.index ["license_number"], name: "index_license_activations_on_license_number", unique: true
   end
 
   create_table "patients", force: :cascade do |t|

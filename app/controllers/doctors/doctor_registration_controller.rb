@@ -1,40 +1,33 @@
 class Doctors::DoctorRegistrationController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :validate_licence_activation, on: :create
-
-  def new
-    @doctor = Doctor.new
-    #redirect_to root_path, notice: 'Doctor created'
-  end
+  before_action :validate_licence_activation, only: :create
 
   def create
-    @doctor = @license_activation.doctors.build
-
-
-    respond_to do |format|
-      format.html { render :new }
-      format.json { render json: { error: 'Combination is not valid' }, status: :unprocessable_entity }
+    @doctor = Doctor.new(license_activation_id: @license_activation.id, practice: @license_activation&.practice)
+    if @doctor.save!
+      @license_activation.update(redeemed: true, redeemed_at: Time.now)
+      session[:doctor_id] = @doctor.id
+      respond_to do |format|
+        format.html { redirect_to new_user_registration_path }
+        format.json { render json: @doctor.errors, status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @doctor.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
 
   def validate_licence_activation
-    @license_activation = LicenseActivation.valid.where(license_number: params[:license_number], code: params[:code])
+    @license_activation = LicenseActivation.valid.where(license_number: params[:license_number], code: params[:sign_in_code]).first
 
-    redirect_to root_path, notice: 'Combination is not valid' if @license_activation.exists?
-      User.
-    else
-      flash[:error] = 'Combination is not valid'
-
-      respond_to do |format|
-        format.html { render :new }
-        format.json { render json: { error: 'Combination is not valid' }, status: :unprocessable_entity }
-      end
-    end
+    redirect_to root_path, notice: 'Combination is not valid' unless @license_activation.present?
   end
 
   def doctor_registration_params
-    params.permit(:license_number, :code)
+    params.permit(:license_number, :sign_in_code)
   end
 end

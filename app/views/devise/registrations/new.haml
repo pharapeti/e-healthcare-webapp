@@ -1,15 +1,17 @@
-%h2 Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :username, required: true
-    = f.input :email,required: true, autofocus: true, input_html: { autocomplete: "email" }
-    = f.input :password, required: true, input_html: { autocomplete: "new-password" },
-      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-    = f.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" }
-  .form-actions
-    = f.button :submit, "Sign up", class: 'btn btn-success'
-
-= link_to 'Sign up as a patient', patient_registration_path
-= link_to 'Sign up as a Doctor', doctor_registration_path
+- if session[:doctor_id] || session[:patient_id]
+  %h2 Sign up
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = f.error_notification
+    .form-inputs
+      = f.input :username, required: true
+      = f.input :email,required: true, autofocus: true, input_html: { autocomplete: "email" }
+      = f.input :password, required: true, input_html: { autocomplete: "new-password" },
+        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+      = f.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" }
+    .form-actions
+      = f.button :submit, "Sign up", class: 'btn btn-success'
+- else
+  .btn-group-lg
+  = link_to 'Sign up as a Patient', patient_registration_path, class: 'btn btn-primary'
+  = link_to 'Sign up as a Doctor', doctor_registration_path, class: 'btn btn-primary'
 = render "devise/shared/links"
