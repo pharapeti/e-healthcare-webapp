@@ -54,14 +54,16 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
   end
 
   create_table "chat_rooms", force: :cascade do |t|
-    t.integer "request_id", null: false
+    t.integer "urgent_request_id"
+    t.integer "consulation_request_id"
     t.integer "patient_id", null: false
     t.integer "doctor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["consulation_request_id"], name: "index_chat_rooms_on_consulation_request_id"
     t.index ["doctor_id"], name: "index_chat_rooms_on_doctor_id"
     t.index ["patient_id"], name: "index_chat_rooms_on_patient_id"
-    t.index ["request_id"], name: "index_chat_rooms_on_request_id", unique: true
+    t.index ["urgent_request_id"], name: "index_chat_rooms_on_urgent_request_id"
   end
 
   create_table "consulation_requests", force: :cascade do |t|
@@ -154,9 +156,10 @@ ActiveRecord::Schema.define(version: 2020_04_28_134040) do
   add_foreign_key "answers", "questions"
   add_foreign_key "chat_messages", "chat_rooms"
   add_foreign_key "chat_messages", "users"
+  add_foreign_key "chat_rooms", "consulation_requests"
   add_foreign_key "chat_rooms", "doctors"
   add_foreign_key "chat_rooms", "patients"
-  add_foreign_key "chat_rooms", "requests"
+  add_foreign_key "chat_rooms", "urgent_requests"
   add_foreign_key "consulation_requests", "doctors", column: "directed_to_id"
   add_foreign_key "consulation_requests", "patients"
   add_foreign_key "doctors", "practices"
