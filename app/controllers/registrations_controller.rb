@@ -9,17 +9,10 @@ class RegistrationsController < Devise::RegistrationsController
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
 
-        if session[:doctor_id]
-          binding.pry
-          doctor = Doctor.find_by(id: session[:doctor_id])
-
-          binding.pry
-          if doctor.present?
-            doctor.update(user: resource)
-          else
-            raise 'Doctor does not exist for this user!'
-          end
-        end
+        associate_doctor if session[:doctor_id]
+        associate_patient if session[:creating_patient]
+        session.delete :doctor_id
+        session.delete :creating_patient
 
         respond_with resource, location: after_sign_up_path_for(resource)
       else
@@ -32,5 +25,19 @@ class RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       respond_with resource
     end
+  end
+
+  private
+
+  def associate_doctor
+    doctor = Doctor.find_by(id: session[:doctor_id])
+    raise 'Doctor does not exist for this user!' unless doctor.present?
+
+    doctor.update!(user: resource)
+  end
+
+  def associate_patient
+    patient = Patient.new(user: resource)
+    raise 'Could not create and associate Patient!' unless patient.save!
   end
 end

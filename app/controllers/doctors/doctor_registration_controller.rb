@@ -1,6 +1,7 @@
 class Doctors::DoctorRegistrationController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :validate_licence_activation, only: :create
+  before_action :nuke_patient_registration_session_var
 
   def create
     @doctor = Doctor.new(license_activation_id: @license_activation.id, practice: @license_activation&.practice)
@@ -20,6 +21,10 @@ class Doctors::DoctorRegistrationController < ApplicationController
   end
 
   private
+
+  def nuke_patient_registration_session_var
+    session.delete :creating_patient
+  end
 
   def validate_licence_activation
     @license_activation = LicenseActivation.valid.where(license_number: params[:license_number], code: params[:sign_in_code]).first

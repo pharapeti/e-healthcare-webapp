@@ -30,7 +30,6 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.created_by = current_user.patient
     @question.directed_to = Doctor.find(question_params[:directed_to_id]) if question_params[:directed_to_id]
-    binding.pry
 
     respond_to do |format|
       if @question.save

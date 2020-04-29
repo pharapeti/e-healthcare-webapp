@@ -15,7 +15,6 @@ class DoctorsController < ApplicationController
   end
 
   def update
-    binding.pry
   end
 
   def profile
