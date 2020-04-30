@@ -1,5 +1,25 @@
-%h1 Questions and Answers
+- if @unanswered_questions.present?
+  %h2 Unanswered questions
+  %table
+    %thead
+      %tr
+        %th Created by
+        %th Question
+        %th Question age
+        %th
+  
+    %tbody
+      - @unanswered_questions.each do |question|
+        %tr
+          %td= question.created_by.user.email
+          %td= question.description
+          %td= distance_of_time_in_words(question.created_at, Time.now)
+          %td= link_to 'Show more', new_doctor_answer_path(question_id: question.id)
+  %br
+- else
+  %bYou have no unanswered questions!
 
+%h2 Questions you have answered
 %table
   %thead
     %tr
@@ -17,4 +37,4 @@
         %td= answer.description
         %td= answer.created_at
         %td= link_to 'Show', doctor_answer_path(answer)
-%br
+  %br

@@ -15,5 +15,7 @@ redeemed_license_activation = LicenseActivation.create(license_number: 'KLJ45', 
 valid_license_action = LicenseActivation.create(license_number: 'JBL999', code: 'abc123', practice: practice)
 doctor = Doctor.create(user: doctor_user, license_activation: redeemed_license_activation, practice: practice)
 
-question = Question.create(created_by: patient, directed_to: doctor, description: 'How do I clean my ears?')
-answer = Answer.create(question: question, answered_by: doctor, description: 'Use some earbuds mate')
+answered_question = Question.create(created_by: patient, directed_to: doctor, description: 'How do I clean my ears?')
+unanswered_question_1 = Question.create(created_by: patient, directed_to: doctor, description: 'Why is the sky blue?')
+unanswered_question_2 = Question.create(created_by: patient, directed_to: doctor, description: 'Who goes there?')
+answer = Answer.create(question: answered_question, answered_by: doctor, description: 'Use some earbuds mate')
