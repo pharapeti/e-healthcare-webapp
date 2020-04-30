@@ -1,6 +1,7 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap-sprockets";
 @import  "../node_modules/bootstrap/scss/bootstrap";
-@import "rails-chat-tutorial";
+@import "avatar";
 @import "rails_bootstrap_forms";
 
 body {

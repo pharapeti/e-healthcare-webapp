@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :chat_rooms
   resources :chat_messages
   resources :transcripts
-  resources :answers
   resources :practices
   resources :license_activations
 
@@ -29,6 +28,10 @@ Rails.application.routes.draw do
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
     get :profile
     root to: 'doctors#index'
+  end
+
+  namespace :doctor do
+    resources :answers
   end
 
   root to: 'static#index'

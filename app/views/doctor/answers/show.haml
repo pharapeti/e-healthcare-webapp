@@ -1,0 +1,8 @@
+%h1 About this question
+
+%p Created by: #{@answer.question.created_by.user.email}
+%p Question: #{@answer.question.description}
+%p Your answer: #{@answer.description}
+%p Answer date: #{@answer.created_at}
+
+= link_to 'Back', doctor_answers_path

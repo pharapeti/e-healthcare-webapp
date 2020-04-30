@@ -1,0 +1,20 @@
+%h1 Questions and Answers
+
+%table
+  %thead
+    %tr
+      %th Asked by
+      %th Question
+      %th Your answer
+      %th Time
+      %th
+
+  %tbody
+    - @answers.each do |answer|
+      %tr
+        %td= answer.question.created_by.user.email
+        %td= answer.question.description
+        %td= answer.description
+        %td= answer.created_at
+        %td= link_to 'Show', doctor_answer_path(answer)
+%br
