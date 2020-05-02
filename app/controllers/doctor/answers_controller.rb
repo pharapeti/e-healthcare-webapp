@@ -17,7 +17,6 @@ class Doctor::AnswersController < ApplicationController
   end
 
   def create
-    binding.pry
     @answer =
       Answer.new(question: @question, answered_by: @doctor, description: params.to_enum.to_h['answer']['description'])
     if @answer.save!

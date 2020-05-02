@@ -12,7 +12,7 @@ class ConsultationRequestsTest < ApplicationSystemTestCase
 
   test "creating a Consultation request" do
     visit consultation_requests_url
-    click_on "New Consultation Request"
+    click_on "Book a consultation"
 
     fill_in "Description", with: @consultation_request.description
     fill_in "Directed to", with: @consultation_request.directed_to_id

@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     get :profile
 
     resources :questions
-    resources :consultation_requests
-    resources :urgent_requests
+    resources :consultation_requests, controller: 'consultation_requests'
+    resources :urgent_requests, controller: 'urgent_requests'
     root to: 'patients#index'
   end
 

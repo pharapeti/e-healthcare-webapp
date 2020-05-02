@@ -7,4 +7,8 @@ class Doctor < ApplicationRecord
   has_many :chat_rooms
 
   validates_presence_of :practice, :license_activation
+
+  def name
+    user.username
+  end
 end

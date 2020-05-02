@@ -1,18 +1,12 @@
-%p#notice= notice
-
-%p
-  %b Patient:
-  = @consultation_request.patient
 %p
   %b Description:
   = @consultation_request.description
 %p
   %b Directed to:
-  = @consultation_request.directed_to
+  = @consultation_request.directed_to.name
 %p
   %b Scheduled for:
   = @consultation_request.scheduled_for
 
-= link_to 'Edit', edit_patient_consultation_request_path(@consultation_request)
-\|
-= link_to 'Back', patient_consultation_requests_path(current_user.patient)
+= link_to 'Back', patient_consultation_requests_path(current_user.patient), class: 'btn btn-info'
+= link_to 'Edit', edit_patient_consultation_request_path(id: @consultation_request), class: 'btn btn-primary'
