@@ -1,5 +1,13 @@
 %h3 Answer the patient's question
-%p Question: #{@question.description}
+%p
+  %b Question:
+  = @answer.question.description
+%p
+  %b Attachment:
+  - if @answer.question.media.present?
+    = image_tag @answer.question.media.variant(resize: "400x400")
+  - else
+    No attachments provided
 
 = bootstrap_form_for @answer, url: doctor_answers_path do |f|
   - if @answer.errors.any?

@@ -14,7 +14,7 @@
           %td= question.created_by.user.email
           %td= question.description
           %td= distance_of_time_in_words(question.created_at, Time.now)
-          %td= link_to 'Show more', new_doctor_answer_path(question_id: question.id)
+          %td= link_to 'Answer', new_doctor_answer_path(question_id: question.id)
   %br
 - else
   %bYou have no unanswered questions!
