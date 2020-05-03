@@ -3,6 +3,15 @@ class DoctorsController < ApplicationController
   before_action :load_doctor
 
   def dashboard
+    @upcoming_consultations =
+      ConsultationRequest
+      .left_outer_joins(:chat_room)
+      .where(directed_to: @doctor, chat_rooms: { consultation_request_id: nil })
+
+    @unanswered_questions =
+      Question
+      .left_outer_joins(:answer)
+      .where(directed_to: @doctor, answers: { question_id: nil })
   end
 
   def index

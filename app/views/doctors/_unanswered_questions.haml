@@ -1,0 +1,15 @@
+%h3 Your unanswered questions
+
+%table
+  %thead
+    %tr
+      %th Patient
+      %th Description
+      %th
+
+  %tbody
+    - @unanswered_questions.each do |question|
+      %tr
+        %td= question.created_by.name
+        %td= question.description
+        %td= link_to 'Answer', new_doctor_answer_path(question_id: question.id)

@@ -1,0 +1,14 @@
+%h3 Your upcoming consultations
+%table
+  %thead
+    %tr
+      %th Patient
+      %th Description
+      %th Scheduled for
+
+  %tbody
+    - @upcoming_consultations.each do |consultation_request|
+      %tr
+        %td= consultation_request.patient.name
+        %td= consultation_request.description
+        %td= consultation_request.scheduled_for
