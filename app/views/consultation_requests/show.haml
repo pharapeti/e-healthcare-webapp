@@ -7,6 +7,12 @@
 %p
   %b Scheduled for:
   = @consultation_request.scheduled_for
+%p
+  %b Attachment:
+  - if @consultation_request.media.attached?
+    = image_tag @consultation_request.media.variant(resize: "400x400")
+  - else
+    No attachments provided
 
 = link_to 'Back', patient_consultation_requests_path(current_user.patient), class: 'btn btn-info'
 = link_to 'Edit', edit_patient_consultation_request_path(id: @consultation_request), class: 'btn btn-primary'

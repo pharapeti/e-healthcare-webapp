@@ -14,7 +14,7 @@
   = @answer.created_at
 %p
   %b Attachment:
-  - if @answer.question.media.present?
+  - if @answer.question.media.attached?
     = image_tag question.media.variant(resize: "400x400")
   - else
     No attachments provided

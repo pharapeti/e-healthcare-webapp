@@ -12,6 +12,8 @@
     = f.collection_select :directed_to_id, Doctor.all, :id, :name
   .field
     = f.datetime_select :scheduled_for
+  .field
+    = f.file_field :media, required: false, label: 'Attachment'
   .actions
     = link_to 'Back', patient_consultation_requests_path, class: 'btn btn-danger'
     = f.submit 'Save', class: 'btn btn-success'

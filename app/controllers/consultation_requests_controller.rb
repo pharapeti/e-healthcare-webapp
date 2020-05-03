@@ -24,6 +24,9 @@ class ConsultationRequestsController < ApplicationController
       directed_to: @doctor,
       scheduled_for: parsed_scheduled_for
     )
+    if consultation_request_params['media'].present?
+      @consultation_request.media.attach(consultation_request_params['media'])
+    end
 
     if @consultation_request.save!
       respond_to do |format|
@@ -42,6 +45,10 @@ class ConsultationRequestsController < ApplicationController
   end
 
   def update
+    if consultation_request_params['media'].present?
+      @consultation_request.media.attach(consultation_request_params['media'])
+    end
+
     if @consultation_request.update!(
       description: consultation_request_params['description'],
       patient: current_user.patient,

@@ -12,6 +12,12 @@
     = f.collection_select :directed_to_id, Doctor.all, :id, :name
   .field
     = f.datetime_select :scheduled_for
+  .field
+    = f.file_field :media, required: false, label: 'Attachment'
+    - if @consultation_request.media.attached?
+      %i Current attachment
+      = image_tag @consultation_request.media.variant(resize: "400x400")
+
   .actions
     = link_to 'Back', patient_consultation_requests_path, class: 'btn btn-danger'
     = f.submit 'Save', class: 'btn btn-success'
