@@ -1,0 +1,20 @@
+%h3 Your upcoming consultations
+%table
+  %thead
+    %tr
+      %th Description
+      %th Doctor
+      %th Scheduled for
+      %th
+      %th
+      %th
+  
+  %tbody
+    - @upcoming_consultations.each do |consultation_request|
+      %tr
+        %td= consultation_request.description
+        %td= consultation_request.directed_to.name
+        %td= consultation_request.scheduled_for
+        %td= link_to 'Show', patient_consultation_request_path(id: consultation_request)
+        %td= link_to 'Edit', edit_patient_consultation_request_path(id: consultation_request)
+        %td= button_to 'Cancel', patient_consultation_request_path(id: consultation_request), method: :delete
