@@ -1,15 +1,20 @@
-%p#notice= notice
-
-%p
-  %b Created by:
-  = @question.created_by
 %p
   %b Directed to:
-  = @question.directed_to
+  = @question.directed_to.name
 %p
   %b Description:
   = @question.description
+- if @answer.present?
+  %p
+    %b Answer:
+    = @answer.description
+  %p
+    %b Answered at:
+    = @answer.created_at
+- else
+  %i Waiting for the Doctor to provide an answer to your question
 
-= link_to 'Edit', edit_patient_question_path(@question)
-\|
+%br
+- if @answer.blank?
+  = link_to 'Edit', edit_patient_question_path(@question)
 = link_to 'Back', patient_questions_path(@patient)

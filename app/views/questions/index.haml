@@ -1,24 +1,10 @@
-%h1 My questions
-
-%table
-  %thead
-    %tr
-      %th Created by
-      %th Directed to
-      %th Description
-      %th
-      %th
-      %th
-
-  %tbody
-    - @questions.each do |question|
-      %tr
-        %td= question.created_by
-        %td= question.directed_to
-        %td= question.description
-        %td= link_to 'Show', question
-        %td= link_to 'Edit', edit_question_path(question)
-        %td= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
+- if @answered_questions.present?
+  = render partial: 'answered'
+%br
+- if @unanswered_questions.present?
+  = render partial: 'unanswered'
+- else
+  %i No unanswered questions!
 
 %br
 

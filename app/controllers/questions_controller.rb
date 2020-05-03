@@ -1,18 +1,20 @@
 class QuestionsController < ApplicationController
   layout 'patients/patients'
-
+  skip_before_action :verify_authenticity_token
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :set_patient
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.where(created_by: Patient.find_by(user_id: current_user.id))
+    @unanswered_questions = Question.left_outer_joins(:answer).where(created_by: @patient, answers: { question_id: nil })
+    @answered_questions = Question.joins(:answer).where(created_by: @patient)
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @answer = @question.answer
   end
 
   # GET /questions/new
@@ -33,7 +35,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to patient_question_path(id: @question), notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -47,7 +49,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to patient_question_path(id: @question), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
