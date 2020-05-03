@@ -2,8 +2,8 @@
 %table
   %thead
     %tr
-      %th Description
       %th Doctor
+      %th Description
       %th Scheduled for
       %th
       %th
@@ -12,8 +12,8 @@
   %tbody
     - @upcoming_consultations.each do |consultation_request|
       %tr
-        %td= consultation_request.description
         %td= consultation_request.directed_to.name
+        %td= consultation_request.description
         %td= consultation_request.scheduled_for
         %td= link_to 'Show', patient_consultation_request_path(id: consultation_request)
         %td= link_to 'Edit', edit_patient_consultation_request_path(id: consultation_request)
