@@ -4,6 +4,12 @@
 %p
   %b Description:
   = @question.description
+%p
+  %b Attachment:
+  - if @question.media.present?
+    = image_tag @question.media.variant(resize: "400x400")
+  - else
+    No attachments provided
 - if @answer.present?
   %p
     %b Answer:
@@ -15,6 +21,6 @@
   %i Waiting for the Doctor to provide an answer to your question
 
 %br
+= link_to 'Back', patient_questions_path(@patient)
 - if @answer.blank?
   = link_to 'Edit', edit_patient_question_path(@question)
-= link_to 'Back', patient_questions_path(@patient)

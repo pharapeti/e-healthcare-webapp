@@ -28,6 +28,7 @@ gem 'cancan'
 gem 'simple_form'
 gem 'coffee-rails'
 gem "bootstrap_form", "~> 4.0"
+gem "mini_magick"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
