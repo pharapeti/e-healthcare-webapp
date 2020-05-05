@@ -17,4 +17,4 @@
         %td= link_to 'Show', patient_question_path(id: question)
         %td= link_to 'Edit', edit_patient_question_path(id: question)
         -#should only be deletable if it has not been answered
-        %td= link_to 'Destroy', patient_question_path(id: question), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= button_to 'Destroy', patient_question_path(id: question), method: :delete, data: { confirm: 'Are you sure?' }
