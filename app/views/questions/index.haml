@@ -1,0 +1,11 @@
+- if @answered_questions.present?
+  = render partial: 'answered'
+%br
+- if @unanswered_questions.present?
+  = render partial: 'unanswered'
+- else
+  %i No unanswered questions!
+
+%br
+
+= link_to 'New Question', new_patient_question_path(@patient)

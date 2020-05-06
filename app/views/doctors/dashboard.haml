@@ -1,0 +1,7 @@
+%h1 Your personalised dashboard
+
+- if @upcoming_consultations.present?
+  = render partial: 'upcoming_consultations'
+%br
+- if @unanswered_questions.present?
+  = render partial: 'unanswered_questions'

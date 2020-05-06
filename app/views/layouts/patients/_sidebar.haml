@@ -1,0 +1,7 @@
+#sidebar-wrapper.bg-light
+  .list-group.list-group-flush
+    = link_to 'Home', root_path, class: 'list-group-item list-group-item-action bg-light'
+    = link_to 'Consultations', patient_consultation_requests_path(current_user.patient), class: 'list-group-item list-group-item-action bg-light'
+    = link_to 'Questions', patient_questions_path(current_user.patient), class: 'list-group-item list-group-item-action bg-light'
+    %a.list-group-item.list-group-item-action.bg-light{:href => "#"} Subscriptions
+    = link_to 'Transcripts', transcripts_path, class: 'list-group-item list-group-item-action bg-light'

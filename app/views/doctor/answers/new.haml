@@ -1,0 +1,24 @@
+%h3 Answer the patient's question
+%p
+  %b Question:
+  = @answer.question.description
+%p
+  %b Attachment:
+  - if @answer.question.media.attached?
+    = image_tag @answer.question.media.variant(resize: "400x400")
+  - else
+    No attachments provided
+
+= bootstrap_form_for @answer, url: doctor_answers_path do |f|
+  - if @answer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@answer.errors.count, "error")} prohibited this answer from being saved:"
+      %ul
+        - @answer.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.text_area :description, label: 'Enter your response here:', minlength: 20, required: true
+    = f.hidden_field :question_id, value: @question.id
+  .actions
+    = link_to 'Back', doctor_answers_path, class: 'btn btn-info'
+    = f.submit 'Submit answer', class: 'btn btn-success'

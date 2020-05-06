@@ -1,0 +1,20 @@
+= form_tag({controller: "doctors/doctor_registration", action: :create}, method: :post, class: "form-horizontal") do
+  %fieldset
+    %legend Register as a Doctor
+
+    .form-group
+      %label.col-md-4.control-label{:for => "number"} Medical License Number
+      .col-md-4
+        %input#license-number.form-control.input-md{:name => "license_number", :placeholder => "ABC123", :type => "text"}/
+
+    .form-group
+      %label.col-md-4.control-label{:for => "sign-in-code"} Sign-in code
+      .col-md-4
+        %input#sign-in-code.form-control.input-md{:name => "sign_in_code", :placeholder => "AJK1924LP", :type => "password"}/
+        %span.help-block Contact NSW Health to receive your code
+    %br
+    .form-group
+      .col-md-8
+        = link_to 'Back', root_path, class: 'btn btn-info'
+        = link_to 'I meant to sign up as a Patient', patient_registration_path, class: 'btn btn-danger'
+        %button#submit.btn.btn-success Create account

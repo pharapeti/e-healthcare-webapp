@@ -1,0 +1,22 @@
+%h1 About this question
+
+%p
+  %b Created by:
+  = @answer.question.created_by.name
+%p
+  %b Question:
+  = @answer.question.description
+%p
+  %b Your answer:
+  = @answer.description
+%p
+  %b Answer date:
+  = @answer.created_at
+%p
+  %b Attachment:
+  - if @answer.question.media.attached?
+    = image_tag question.media.variant(resize: "400x400")
+  - else
+    No attachments provided
+
+= link_to 'Back', doctor_answers_path

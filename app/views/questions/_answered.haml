@@ -1,0 +1,17 @@
+%h3 Answered Questions
+
+%table
+  %thead
+    %tr
+      %th Doctor
+      %th Description
+      %th Answer
+      %th
+  
+  %tbody
+    - @answered_questions.each do |question|
+      %tr
+        %td= question.directed_to.name
+        %td= question.description
+        %td= question.answer.description
+        %td= link_to 'Show', patient_question_path(id: question)

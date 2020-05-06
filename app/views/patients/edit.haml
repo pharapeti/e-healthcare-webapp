@@ -1,0 +1,16 @@
+%h2
+  Update Profile
+= bootstrap_form_for(@patient) do |f|
+  - if @patient.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@patient.errors.count, "error")} prohibited this patient from being saved:"
+      %ul
+        - @patient.errors.full_messages.each do |message|
+          %li= message
+  
+  .form-inputs
+  -#= f.input :license_number
+  -#= f.input :practice_id
+  .form-actions
+    = link_to "Back", :back, class: 'btn btn-danger'
+    = f.button :submit

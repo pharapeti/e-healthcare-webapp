@@ -1,0 +1,20 @@
+%h3 Unanswered Questions
+
+%table
+  %thead
+    %tr
+      %th Doctor
+      %th Description
+      %th
+      %th
+      %th
+  
+  %tbody
+    - @unanswered_questions.each do |question|
+      %tr
+        %td= question.directed_to.name
+        %td= question.description
+        %td= link_to 'Show', patient_question_path(id: question)
+        %td= link_to 'Edit', edit_patient_question_path(id: question)
+        -#should only be deletable if it has not been answered
+        %td= button_to 'Destroy', patient_question_path(id: question), method: :delete, data: { confirm: 'Are you sure?' }

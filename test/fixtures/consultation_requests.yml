@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  description: MyText
+  directed_to: one
+  scheduled_for: 2020-04-26 21:13:25
+
+two:
+  patient: two
+  description: MyText
+  directed_to: two
+  scheduled_for: 2020-04-26 21:13:25

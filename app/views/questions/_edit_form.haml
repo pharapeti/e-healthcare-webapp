@@ -1,0 +1,16 @@
+= bootstrap_form_for @question, url: patient_question_path(id: @question),  method: 'PATCH', remote: true do |f|
+  - if @question.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+      %ul
+        - @question.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.file_field :media, required: false
+  .field
+    = f.collection_select :directed_to_id, Doctor.all, :id, :name
+  .field
+    = f.text_area :description, required: true
+  .actions
+    = f.submit 'Update question', class: 'btn-primary'

@@ -1,0 +1,6 @@
+.card-body
+  %h5.card-title Profile
+  %h6.card-subtitle.mb-2.text-muted this is your profile
+  %p.card-text
+    = "they there #{current_user.username}"
+  = link_to 'Edit', edit_doctor_path(current_user.doctor), class: 'card-link' #EDIT DOCTOR_PATH(current_user.doctor)

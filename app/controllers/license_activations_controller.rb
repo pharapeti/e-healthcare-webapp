@@ -1,0 +1,2 @@
+class LicenseActivationsController < ApplicationController
+end

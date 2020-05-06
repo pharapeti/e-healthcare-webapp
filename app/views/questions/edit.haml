@@ -1,0 +1,7 @@
+%h1 Editing question
+
+= render 'edit_form'
+
+= link_to 'Show', patient_question_path(id: @question)
+\|
+= link_to 'Back', patient_questions_path(@patient)
