@@ -14,7 +14,6 @@ class PatientChatRoomsController < PatientsController
   end
 
   def create
-
   end
 
   private
@@ -40,6 +39,7 @@ class PatientChatRoomsController < PatientsController
   end
 
   def set_up_chat_room
+    @chat_room.request.update!(status: :in_progress)
     @chat_message = ChatMessage.new chat_room: @chat_room
     @chat_messages = @chat_room.chat_messages.includes(:user)
   end
