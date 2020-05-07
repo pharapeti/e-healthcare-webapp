@@ -13,6 +13,10 @@ class PatientChatRoomsController < PatientsController
     end
   end
 
+  def create
+
+  end
+
   private
 
   def handle_urgent_request
@@ -37,7 +41,7 @@ class PatientChatRoomsController < PatientsController
 
   def set_up_chat_room
     @chat_message = ChatMessage.new chat_room: @chat_room
-    @chat_messages = @chat_room.chat_messages.includes(:patient)
+    @chat_messages = @chat_room.chat_messages.includes(:user)
   end
 
   def load_chat_room

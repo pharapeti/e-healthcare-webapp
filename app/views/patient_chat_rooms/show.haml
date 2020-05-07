@@ -3,8 +3,8 @@
 
 %br
 .row
-  .col-12.col-md-3
-    .card{style: "width: 18rem;"}
+  .col-12.col-md-4
+    .card{style: "width: 20rem;"}
       .card-body
         %h5.card-title Information
         %p.card-text #{@chat_room.request.description}
@@ -16,7 +16,17 @@
   .col
     .chat
       - @chat_messages.each do |chat_message|
-        = chat_message
+        .chat-message-container
+          .row.no-gutters
+            .col-auto.text-center
+              %img.avatar{alt: "", src: "#{gravatar_url(chat_message.user)}"}/
+            .col
+              .message-content
+                %p.mb-1
+                  = chat_message.message
+                .text-right
+                  %small
+                    = chat_message.created_at
     = simple_form_for @chat_message, remote: true do |form|
       .input-group.mb-3
         = form.input :message, as: :string, wrapper: false, label: false, input_html: { class: 'chat-input' }
