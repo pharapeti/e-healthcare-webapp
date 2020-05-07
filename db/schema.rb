@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_131029) do
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
   end
 
-  create_table "chat_rooms", force: :cascade do |t|
+  create_table "patient_chat_rooms", force: :cascade do |t|
     t.integer "urgent_request_id"
     t.integer "consultation_request_id"
     t.integer "patient_id", null: false
@@ -156,12 +156,12 @@ ActiveRecord::Schema.define(version: 2020_04_29_131029) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "doctors", column: "answered_by_id"
   add_foreign_key "answers", "questions"
-  add_foreign_key "chat_messages", "chat_rooms"
+  add_foreign_key "chat_messages", "patient_chat_rooms"
   add_foreign_key "chat_messages", "users"
-  add_foreign_key "chat_rooms", "consultation_requests"
-  add_foreign_key "chat_rooms", "doctors"
-  add_foreign_key "chat_rooms", "patients"
-  add_foreign_key "chat_rooms", "urgent_requests"
+  add_foreign_key "patient_chat_rooms", "consultation_requests"
+  add_foreign_key "patient_chat_rooms", "doctors"
+  add_foreign_key "patient_chat_rooms", "patients"
+  add_foreign_key "patient_chat_rooms", "urgent_requests"
   add_foreign_key "consultation_requests", "doctors", column: "directed_to_id"
   add_foreign_key "consultation_requests", "patients"
   add_foreign_key "doctors", "practices"
@@ -169,6 +169,6 @@ ActiveRecord::Schema.define(version: 2020_04_29_131029) do
   add_foreign_key "patients", "users"
   add_foreign_key "questions", "doctors", column: "directed_to_id"
   add_foreign_key "questions", "patients", column: "created_by_id"
-  add_foreign_key "transcripts", "chat_rooms"
+  add_foreign_key "transcripts", "patient_chat_rooms"
   add_foreign_key "urgent_requests", "patients"
 end

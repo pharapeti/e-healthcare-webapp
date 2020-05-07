@@ -1,5 +1,4 @@
 class ChatRoom < ApplicationRecord
-  belongs_to :request
   belongs_to :patient
   belongs_to :doctor
   belongs_to :consultation_request, optional: true, class_name: 'ConsultationRequest', foreign_key: 'consultation_request_id'
@@ -7,5 +6,9 @@ class ChatRoom < ApplicationRecord
   has_one :transcript
   has_many :chat_messages, dependent: :destroy, inverse_of: :chat_room
 
-  validates_presence_of :request, :patient, :doctor
+  validates_presence_of :patient, :doctor
+
+  def request
+    consultation_request.presence || urgent_request.presence || nil
+  end
 end
