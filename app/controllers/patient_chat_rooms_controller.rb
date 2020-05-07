@@ -20,6 +20,8 @@ class PatientChatRoomsController < PatientsController
 
   def handle_urgent_request
     urgent_request = UrgentRequest.find_by(id: params[:urgent_request_id])
+    # Need to check if it is in progress; if so we should just redirect the user
+    # back to the homepage and say that the consultation is over
     @chat_room = ChatRoom.find_or_create_by(patient: @patient, urgent_request: urgent_request)
     set_up_chat_room
 
@@ -28,6 +30,7 @@ class PatientChatRoomsController < PatientsController
 
   def handle_consultation_request
     consultation_request = ConsultationRequest.find_by(id: params[:consultation_request_id])
+    # same as above
     @chat_room = ChatRoom.find_or_create_by(
       consultation_request: consultation_request,
       patient: @patient,
