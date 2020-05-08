@@ -11,7 +11,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
-gem 'bootstrap-sass', '~> 3.4.1'
+gem 'bootstrap-sass'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -23,7 +23,6 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
 gem 'cancan'
-# # gem 'bootstrap', '~> 4.3.1'
 # gem 'jquery-rails'
 gem 'simple_form'
 gem 'coffee-rails'

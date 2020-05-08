@@ -264,7 +264,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
-  bootstrap-sass (~> 3.4.1)
+  bootstrap-sass
   bootstrap_form (~> 4.0)
   byebug
   cancan
