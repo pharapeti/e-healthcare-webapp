@@ -1,4 +1,4 @@
-class Doctors::ConsultationRequestController < ApplicationController
+class Doctors::ConsultationRequestController < DoctorsController
   def show
   end
   
