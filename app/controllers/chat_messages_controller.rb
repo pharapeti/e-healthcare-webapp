@@ -6,6 +6,7 @@ class ChatMessagesController < ApplicationController
   def create
     @chat_message =
       ChatMessage.create user: current_user, chat_room: @chat_room, message: params["chat_message"]
+    ChatRoomChannel.broadcast_to @chat_room, @chat_message
     respond_to do |format|
       format.html do
         redirect_to patient_connect_with_doctor_path(

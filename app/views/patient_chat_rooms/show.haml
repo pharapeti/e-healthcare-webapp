@@ -40,7 +40,7 @@
         .chat-message-container
           .row.no-gutters
             .col-auto.text-center
-              %img.avatar{alt: "", src: "#{gravatar_url(chat_message.user)}"}/
+              %img.avatar{alt: "", src: "#{current_user.gravatar_url}"}/
             .col
               .message-content
                 %p.mb-1
