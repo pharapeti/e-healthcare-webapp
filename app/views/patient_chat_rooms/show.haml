@@ -35,7 +35,7 @@
             = image_tag @chat_room.request.media.variant(resize: "200x200")
         %a.btn.btn-primary{href: "#"} Button to do something...
   .col
-    .chat
+    .chat{"data-channel-subscribe" => "chat_room", "data-chat-room-id" => "#{@chat_room.id}"}
       - @chat_messages.each do |chat_message|
         .chat-message-container
           .row.no-gutters
@@ -54,3 +54,14 @@
         .input-group-append
           = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'
       = form.input :chat_room_id, as: :hidden
+
+.d-none{"data-role" => "chat-message-template"}
+  .chat-message-container
+    .row.no-gutters
+      .col-auto.text-center
+        %img.avatar{alt: "", "data-role" => "user-avatar", src: ""}/
+      .col
+        .chat-message-content
+          %p.mb-1{"data-role" => "chat-message-text"}
+          .text-right
+            %small{"data-role" => "chat-message-date"}

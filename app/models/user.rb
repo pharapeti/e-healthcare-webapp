@@ -8,6 +8,11 @@ class User < ApplicationRecord
   validate :only_doctor_or_patient
   validates :username, uniqueness: true, presence: true
 
+  def gravatar_url
+    gravatar_id = Digest::MD5::hexdigest(email).downcase
+    "https://gravatar.com/avatar/#{gravatar_id}.png"
+  end
+
   private
 
   def only_doctor_or_patient
@@ -16,10 +21,5 @@ class User < ApplicationRecord
     elsif doctor
       errors.add(:base, 'User is a doctor and cannot also be a patient')
     end
-  end
-
-  def gravatar_url
-    gravatar_id = Digest::MD5::hexdigest(email).downcase
-    "https://gravatar.com/avatar/#{gravatar_id}.png"
   end
 end
