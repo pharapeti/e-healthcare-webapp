@@ -1,0 +1,7 @@
+- if @upcoming_consultation_requests.present?
+  = @upcoming_consultation_requests
+- else
+  %i You have no upcoming consultations
+
+- if @past_consultation_requests.present?
+  = @past_consultation_requests

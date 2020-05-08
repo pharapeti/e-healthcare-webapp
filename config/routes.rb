@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :transcripts
   resources :practices
   resources :license_activations
+  
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
   resources :doctors do
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
     get :profile
+
+    resources :consultation_requests, controller: 'doctors/consultation_request'
     root to: 'doctors#index'
   end
 
