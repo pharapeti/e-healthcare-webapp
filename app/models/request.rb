@@ -5,9 +5,5 @@ class Request < ApplicationRecord
   has_one_attached :media
 
   validates_presence_of :patient, :status
-
-  scope :upcoming, -> { scheduled_for > Time.now }
-  scope :past, -> { scheduled_for < Time.now }
-
   enum status: %i[scheduled in_progress finished]
 end
