@@ -1,3 +1,3 @@
 //= link_tree ../images
-//= link patient_chat_room.js
+//= link channels/chat_room_channel.js
 //= link_directory ../stylesheets .css

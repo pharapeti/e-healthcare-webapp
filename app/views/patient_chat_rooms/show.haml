@@ -1,11 +1,11 @@
-= javascript_include_tag 'patient_chat_room'
+= javascript_include_tag 'channels/chat_room_channel'
 :coffee
   $ ->
     $('form#new_chat_message').on 'submit', (e) ->
       e.preventDefault()
       msg = $('input#chat_message_message').val()
       chatRoomID = $('input#chat_message_chat_room_id').val()
-      
+
       if msg != ''
         $.ajax
           type: 'POST'
@@ -18,6 +18,8 @@
             $('input#chat_message_message').val ''
           fail: ->
             alert('Try again')
+      
+    $(".chat").stop().animate({ scrollTop: $(".chat")[0].scrollHeight}, 1000);
 
 %h4
   You are speaking with #{@chat_room.doctor.name}
@@ -35,7 +37,7 @@
             = image_tag @chat_room.request.media.variant(resize: "200x200")
         %a.btn.btn-primary{href: "#"} Button to do something...
   .col
-    .chat{"data-channel-subscribe" => "chat_room", "data-chat-room-id" => "#{@chat_room.id}"}
+    .chat{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
       - @chat_messages.each do |chat_message|
         .chat-message-container
           .row.no-gutters
