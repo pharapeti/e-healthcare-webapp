@@ -66,7 +66,7 @@
                     = chat_message.created_at.in_time_zone('Sydney').strftime("%-d/%-m/%y: %H:%M %P")
     = simple_form_for @chat_message, remote: true do |form|
       .input-group.mb-3
-        = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...'
+        = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...',
           input_html: { class: 'chat-input' },include_blank: false
         .input-group-append
           = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'

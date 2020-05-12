@@ -1,6 +1,6 @@
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
-require("channels");
+require("channels")
 
 import {} from 'jquery-ujs'
 import "bootstrap";
