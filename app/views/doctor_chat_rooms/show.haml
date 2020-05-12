@@ -21,8 +21,19 @@
       
     $(".chat").stop().animate({ scrollTop: $(".chat")[0].scrollHeight}, 1000);
 
+:sass
+  #create-prescription
+    color: black
+    background: dodgerblue
+    
+  body
+    height: 100vh;
+    overflow: hidden;
+    margin: 0 0 1px;
+
+
 %h4
-  You are speaking with #{@chat_room.doctor.name}
+  You are speaking with a patient with the username: #{@chat_room.patient.name}
 
 %br
 .row
@@ -35,23 +46,23 @@
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
-        %a.btn.btn-primary{href: "#"} Button to do something...
+        %a.btn.btn-primary#create-prescription Provide a prescription
   .col
     .chat{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
       - @chat_messages.each do |chat_message|
-        :ruby
-          sent_by = chat_message.user == current_user ? 'me' : 'you'
         .chat-message-container
           .row.no-gutters
             .col-auto.text-center
               %img.avatar{alt: "", src: "#{current_user.gravatar_url}"}/
             .col
+              :ruby
+                sent_by = chat_message.user == current_user ? 'me' : 'you'
               .message-content{class: sent_by }
                 %p.mb-1
                   = chat_message.message
                 .text-right
                   %small
-                    = chat_message.created_at
+                    = chat_message.created_at.in_time_zone('Sydney').strftime("%-d/%-m/%y: %H:%M %P")
     = simple_form_for @chat_message, remote: true do |form|
       .input-group.mb-3
         = form.input :message, as: :string, wrapper: false, label: false,

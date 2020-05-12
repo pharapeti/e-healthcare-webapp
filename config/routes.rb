@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :chat_rooms
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
     get :profile
+    get :connect_with_patient, to: 'doctor_chat_rooms#connect_with_patient'
+
     root to: 'doctors#index'
   end
 
