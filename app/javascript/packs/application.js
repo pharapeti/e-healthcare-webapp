@@ -1,10 +1,9 @@
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
-require("channels")
+require("channels");
 
-import {} from 'jquery-ujs'
-import "bootstrap";
 import "../../assets/stylesheets/application";
+import '../../javascript/channels/chat_room_channel'
 
 global.$ = require('jquery');
 window.$ = window.jQuery = jQuery;
