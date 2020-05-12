@@ -50,13 +50,14 @@
   .col
     .chat{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
       - @chat_messages.each do |chat_message|
+        :ruby
+          sent_by = chat_message.user == current_user ? 'me' : 'you'
+
         .chat-message-container
           .row.no-gutters
             .col-auto.text-center
-              %img.avatar{alt: "", src: "#{current_user.gravatar_url}"}/
+              %img.avatar{alt: "", src: "#{chat_message.user.gravatar_url}"}/
             .col
-              :ruby
-                sent_by = chat_message.user == current_user ? 'me' : 'you'
               .message-content{class: sent_by }
                 %p.mb-1
                   = chat_message.message
@@ -65,7 +66,7 @@
                     = chat_message.created_at.in_time_zone('Sydney').strftime("%-d/%-m/%y: %H:%M %P")
     = simple_form_for @chat_message, remote: true do |form|
       .input-group.mb-3
-        = form.input :message, as: :string, wrapper: false, label: false,
+        = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...'
           input_html: { class: 'chat-input' },include_blank: false
         .input-group-append
           = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'
