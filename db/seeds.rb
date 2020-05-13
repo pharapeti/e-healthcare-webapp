@@ -19,3 +19,6 @@ answered_question = Question.create(created_by: patient, directed_to: doctor, de
 unanswered_question_1 = Question.create(created_by: patient, directed_to: doctor, description: 'Why is the sky blue?')
 unanswered_question_2 = Question.create(created_by: patient, directed_to: doctor, description: 'Who goes there?')
 answer = Answer.create(question: answered_question, answered_by: doctor, description: 'Use some earbuds mate')
+
+chat = chat_rooms.create(urgent_request_id: '21', patient: patient, doctor: doctor)
+transcript = transcripts.create(chat_room_id: chat)
