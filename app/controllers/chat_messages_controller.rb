@@ -7,6 +7,22 @@ class ChatMessagesController < ApplicationController
     @chat_message =
       ChatMessage.create user: current_user, chat_room: @chat_room, message: params['chat_message']
     ChatRoomChannel.broadcast_to @chat_room, @chat_message
+
+    mine = ApplicationController.render(
+      partial: 'chat_messages/mine',
+      locals: { chat_message: @chat_message }
+    )
+
+    theirs = ApplicationController.render(
+      partial: 'chat_messages/theirs',
+      locals: { chat_message: @chat_message }
+    )
+
+    ActionCable.server.broadcast(
+      "chat_room_channel_#{@chat_message.chat_room.id}",
+      mine: mine, theirs: theirs, chat_message: @chat_message
+    )
+
     respond_to do |format|
       format.html do
         if current_user.patient.present?
@@ -28,7 +44,7 @@ class ChatMessagesController < ApplicationController
   protected
 
   def load_chat_room
-    @chat_room = ChatRoom.find params['chat_room_id']
+    @chat_room = ChatRoom.find params["chat_room_id"]
   end
 
   def check_message

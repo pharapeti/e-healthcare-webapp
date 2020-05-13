@@ -23,5 +23,5 @@
       .d-flex#wrapper
         - if user_signed_in?
           = render partial: 'layouts/doctors/sidebar'
-        .col-8
+        .col-8.col-md-10
           = yield

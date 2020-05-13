@@ -1,0 +1,8 @@
+.chat-message.mb-2.me
+  .content-container
+    .content
+      %p.mb-1
+        = chat_message.message
+      .text-right
+        %small
+          = chat_message.created_at.in_time_zone('Sydney').strftime("%-d/%-m/%y: %H:%M %P")

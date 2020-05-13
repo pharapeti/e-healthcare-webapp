@@ -1,11 +1,10 @@
-= javascript_include_tag 'channels/chat_room_channel'
 :coffee
   $ ->
+    $("#chat_messages").scrollTop = $("#chat_messages").scrollHeight
     $('form#new_chat_message').on 'submit', (e) ->
-      e.preventDefault()
       msg = $('input#chat_message_message').val()
       chatRoomID = $('input#chat_message_chat_room_id').val()
-
+  
       if msg != ''
         $.ajax
           type: 'POST'
@@ -18,16 +17,21 @@
             $('input#chat_message_message').val ''
           fail: ->
             alert('Try again')
-      
-    $(".chat").stop().animate({ scrollTop: $(".chat")[0].scrollHeight}, 1000);
+      return false
+  
+    $('input#chat_message_message').on 'input', (e) ->
+      $('input.chat-input').toggleClass('disabled', e.target.value == "")
+
+#user-id{"data-user-id" => "#{current_user.id}" }
+#chat-room-id{"data-chat-room-id" => "#{@chat_room.id}"}
 
 %h4
   You are speaking with #{@chat_room.doctor.name}
 
 %br
 .row
-  .col-12.col-md-4
-    .card{style: "width: 20rem;"}
+  .col-3
+    .card
       .card-body
         %h5.card-title Information
         %p.card-text #{@chat_room.request.description}
@@ -35,31 +39,23 @@
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
-        %a.btn.btn-primary{href: "#"} Button to do something...
-  .col
-    .chat{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
-      - @chat_messages.each do |chat_message|
-        :ruby
-          sent_by = chat_message.user == current_user ? 'me' : 'you'
-
-        .chat-message-container
-          .row.no-gutters
-            .col-auto.text-center
-              %img.avatar{alt: "", src: "#{chat_message.user.gravatar_url}"}/
-            .col
-              .message-content{class: sent_by }
-                %p.mb-1
-                  = chat_message.message
-                .text-right
-                  %small
-                    = chat_message.created_at.in_time_zone('Sydney').strftime("%-d/%-m/%y: %H:%M %P")
-    = simple_form_for @chat_message, remote: true do |form|
-      .input-group.mb-3
-        = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...',
-          input_html: { class: 'chat-input' }, include_blank: false
-        .input-group-append
-          = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'
-      = form.input :chat_room_id, as: :hidden
+  .col-9
+    .chat-room{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
+      #chat_messages
+        - @chat_messages.each do |chat_message|
+          - if chat_message.user == current_user
+            = render 'chat_messages/mine', chat_message: chat_message
+          - else
+            = render 'chat_messages/theirs', chat_message: chat_message
+  
+      .chat-box
+        = simple_form_for @chat_message, remote: true do |form|
+          .input-group.mb-3
+            = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...',
+              input_html: { class: 'chat-input' }, include_blank: false
+            .input-group-append
+              = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'
+          = form.input :chat_room_id, as: :hidden
 
 .d-none{"data-role" => "chat-message-template"}
   .chat-message-container
