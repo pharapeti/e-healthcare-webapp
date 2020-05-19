@@ -48,7 +48,7 @@ body {
 }
 
 .chat-room {
-  height: 88vh;
+  height: 75vh;
 
   #chat_messages {
     height: 100%;
@@ -82,7 +82,6 @@ body {
 
   .chat-box {
     position: absolute;
-    bottom: -10px;
     padding: 20px;
     width: 100%;
     margin-left: -15px;
