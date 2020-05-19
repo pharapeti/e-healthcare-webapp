@@ -1,0 +1,69 @@
+:coffee
+  $ ->
+    $("#chat_messages").scrollTop = $("#chat_messages").scrollHeight
+    $('form#new_chat_message').on 'submit', (e) ->
+      msg = $('input#chat_message_message').val()
+      chatRoomID = $('input#chat_message_chat_room_id').val()
+  
+      if msg != ''
+        $.ajax
+          type: 'POST'
+          url: '#{chat_messages_path.html_safe}'
+          data:
+            chat_message: msg
+            chat_room_id: chatRoomID
+          dataType: 'json'
+          success: ->
+            $('input#chat_message_message').val ''
+          fail: ->
+            alert('Try again')
+      return false
+  
+    $('input#chat_message_message').on 'input', (e) ->
+      $('input.chat-input').toggleClass('disabled', e.target.value == "")
+
+#user-id{"data-user-id" => "#{current_user.id}" }
+#chat-room-id{"data-chat-room-id" => "#{@chat_room.id}"}
+
+%h4
+  You are speaking with #{@chat_room.doctor.name}
+
+%br
+.row
+  .col-3
+    .card
+      .card-body
+        %h5.card-title Information about your request
+        %p.card-text Description: #{@chat_room.request.description}
+        - if @chat_room.request.media.attached?
+          %p.card-text
+            %b Attachment:
+            = image_tag @chat_room.request.media.variant(resize: "200x200")
+  .col-9
+    .chat-room{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
+      #chat_messages
+        - @chat_messages.each do |chat_message|
+          - if chat_message.user == current_user
+            = render 'chat_messages/mine', chat_message: chat_message
+          - else
+            = render 'chat_messages/theirs', chat_message: chat_message
+  
+      .chat-box
+        = simple_form_for @chat_message, remote: true do |form|
+          .input-group.mb-3
+            = form.input :message, as: :string, wrapper: false, label: false, placeholder: 'Type your message here...',
+              input_html: { class: 'chat-input' }, include_blank: false
+            .input-group-append
+              = form.submit "Send", remote: true, class: 'btn btn-primary chat-input'
+          = form.input :chat_room_id, as: :hidden
+
+.d-none{"data-role" => "chat-message-template"}
+  .chat-message-container
+    .row.no-gutters
+      .col-auto.text-center
+        %img.avatar{alt: "", "data-role" => "user-avatar", src: ""}/
+      .col
+        .chat-message-content
+          %p.mb-1{"data-role" => "chat-message-text"}
+          .text-right
+            %small{"data-role" => "chat-message-date"}

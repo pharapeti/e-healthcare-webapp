@@ -8,16 +8,16 @@ Rails.application.routes.draw do
     post 'doctors/register', to: 'doctors/doctor_registration#create'
   end
 
-  resources :chat_rooms
   resources :chat_messages
   resources :practices
   resources :license_activations
-  
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'
     get :profile
+    get :connect_with_doctor, to: 'patient_chat_rooms#connect_with_doctor'
 
+    resources :chat_rooms
     resources :questions
     resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   resources :doctors do
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
     get :profile
+    get :connect_with_patient, to: 'doctor_chat_rooms#connect_with_patient'
 
+    resources :chat_rooms
     resources :transcripts, controller: 'doctors/transcripts'
     resources :consultation_requests, controller: 'doctors/consultation_request'
     root to: 'doctors#index'

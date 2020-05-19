@@ -3,5 +3,6 @@ class ConsultationRequest < Request
   has_one :chat_room, foreign_key: 'consultation_request_id'
 
   validates_length_of :description, minimum: 5, maximum: 1000
-  scope :expired, -> { scheduled_for < Time.now }
+  scope :upcoming, -> { scheduled_for > Time.now }
+  scope :past, -> { scheduled_for < Time.now }
 end

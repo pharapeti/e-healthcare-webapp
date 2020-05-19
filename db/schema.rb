@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_131029) do
+ActiveRecord::Schema.define(version: 2020_05_07_134829) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_131029) do
     t.datetime "scheduled_for"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
     t.index ["directed_to_id"], name: "index_consultation_requests_on_directed_to_id"
     t.index ["patient_id"], name: "index_consultation_requests_on_patient_id"
   end
@@ -136,6 +137,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_131029) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
     t.index ["patient_id"], name: "index_urgent_requests_on_patient_id"
   end
 

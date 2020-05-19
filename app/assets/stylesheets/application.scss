@@ -1,8 +1,6 @@
-// Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap-sprockets";
-@import  "../node_modules/bootstrap/scss/bootstrap";
-@import "avatar";
+@import "bootstrap/scss/bootstrap";
 @import "rails_bootstrap_forms";
+@import "avatar";
 
 body {
   overflow-x: hidden;
@@ -46,5 +44,57 @@ body {
 
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
+  }
+}
+
+.chat-room {
+  height: 88vh;
+
+  #chat_messages {
+    height: 100%;
+    overflow-y: scroll;
+    //padding-bottom: 200px;
+    padding-top: 20px;
+  }
+
+  .chat-message {
+    min-height: 75px;
+    .content-container {
+      display: inline-block;
+      .content {
+        background-color: #eeeeee;
+        padding: 8px 16px;
+        border-radius: 20px;
+        max-width: 600px;
+        overflow-wrap: break-word;
+      }
+    }
+    &.me {
+      .content-container {
+        float: right;
+        .content {
+          background-color: #007bff;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .chat-box {
+    position: absolute;
+    bottom: -10px;
+    padding: 20px;
+    width: 100%;
+    margin-left: -15px;
+    background-color: white;
+    border-top: 1px solid #eeeeee;
+    input[type=text] {
+      height: 45px;
+      font-size: 18px;
+      padding: 8px;
+    }
+    .btn {
+      height: 45px;
+    }
   }
 }
