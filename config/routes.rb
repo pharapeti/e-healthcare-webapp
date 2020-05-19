@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   end
 
   resources :chat_messages
-  resources :transcripts
   resources :practices
   resources :license_activations
 
@@ -20,17 +19,20 @@ Rails.application.routes.draw do
 
     resources :chat_rooms
     resources :questions
+    resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
     resources :urgent_requests, controller: 'urgent_requests'
     root to: 'patients#index'
   end
 
   resources :doctors do
-    resources :chat_rooms
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
     get :profile
     get :connect_with_patient, to: 'doctor_chat_rooms#connect_with_patient'
 
+    resources :chat_rooms
+    resources :transcripts, controller: 'doctors/transcripts'
+    resources :consultation_requests, controller: 'doctors/consultation_request'
     root to: 'doctors#index'
   end
 
