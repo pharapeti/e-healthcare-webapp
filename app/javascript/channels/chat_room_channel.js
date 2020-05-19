@@ -28,7 +28,7 @@ window.addEventListener('load', () =>{
       }
 
       const chatMessageContainer = document.getElementById("chat_messages");
-      chatMessageContainer.innerHTML = chatMessageContainer.innerHTML + html
+      chatMessageContainer.innerHTML = chatMessageContainer.innerHTML + html;
       chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight - chatMessageContainer.clientHeight;
     }
   });

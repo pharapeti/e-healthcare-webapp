@@ -6,7 +6,6 @@ class ChatMessagesController < ApplicationController
   def create
     @chat_message =
       ChatMessage.create user: current_user, chat_room: @chat_room, message: params['chat_message']
-    ChatRoomChannel.broadcast_to @chat_room, @chat_message
 
     mine = ApplicationController.render(
       partial: 'chat_messages/mine',

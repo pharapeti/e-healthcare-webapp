@@ -33,8 +33,8 @@
   .col-3
     .card
       .card-body
-        %h5.card-title Information
-        %p.card-text #{@chat_room.request.description}
+        %h5.card-title Information about your request
+        %p.card-text Description: #{@chat_room.request.description}
         - if @chat_room.request.media.attached?
           %p.card-text
             %b Attachment:
