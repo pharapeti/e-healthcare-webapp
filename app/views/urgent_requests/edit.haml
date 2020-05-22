@@ -1,3 +1,23 @@
-%h1 Editing urgent_request
+= form_for @urgent_request, url: patient_urgent_request_path do |f|
+  - if @urgent_request.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@urgent_request.errors.count, "error")} prohibited this urgent_request from being saved:"
+      %ul
+        - @urgent_request.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :Media
+  .field
+    = f.file_field :media, required: false
+  .field
+    = f.label :Description
+  .field
+    = f.text_area :description, required: true
+  .actions
+    = f.submit 'Edit urgent request', class: 'btn-primary'
+  .field
 
 
+
+    = link_to 'Back', 'javascript:history.back()'

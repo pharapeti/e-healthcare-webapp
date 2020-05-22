@@ -1,3 +1,4 @@
+%h1 Waiting Room
 %p
   %b Patient:
   = @urgent_request.patient
@@ -5,6 +6,8 @@
   %b Description:
   = @urgent_request.description
 
+= link_to 'Continue', patient_chat_room_path
+\|
 = link_to 'Edit', edit_patient_urgent_request_path(@urgent_request)
 \|
-= link_to 'Back', patient_urgent_requests_path(@patient)
+= link_to 'Back', 'javascript:history.back()'

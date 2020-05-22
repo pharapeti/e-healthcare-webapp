@@ -34,6 +34,15 @@ class UrgentRequestsController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @urgent_request.update(urgent_request_params)
+        format.html { redirect_to patient_urgent_request_path(id: @urgent_request), notice: 'Question was successfully updated.' }
+        format.json { render :show, status: :ok, location: @urgent_request }
+      else
+        format.html { render :edit }
+        format.json { render json: @urgent_request.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
