@@ -3,13 +3,19 @@
     $('.company-name').on 'click', ->
       window.location.href = '/'
 
+:sass
+  #UrgentHelp
+    margin-top: 4px
+    margin-right: 10px
+
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
   #company-name
     E healthcare
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.ml-auto.mt-2.mt-lg-0
       %li.nav-item
-        = link_to 'Seek urgent help', new_patient_urgent_request_path(current_user.patient), class: 'btn btn-danger'
+        = link_to 'Seek urgent help', new_patient_urgent_request_path(current_user.patient),
+          class: 'btn btn-danger', id: 'UrgentHelp'
 
       .dropdown
         %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true",
