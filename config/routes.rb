@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :prescriptions
   devise_for :users, controllers: { registrations: "registrations" }
   devise_scope :users do
     get 'patients/register', to: 'patients/patient_registration#new', as: 'patient_registration'
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
       get :end_session, to: 'patient_chat_rooms#end_session'
     end
     resources :questions
+    resources :prescriptions, controller: 'prescriptions'
     resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
     resources :urgent_requests, controller: 'urgent_requests'

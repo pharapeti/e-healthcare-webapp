@@ -1,9 +1,11 @@
 %p
   %b Directed to:
   = @question.directed_to.name
+
 %p
   %b Description:
   = @question.description
+
 %p
   %b Attachment:
   - if @question.media.attached?
@@ -16,11 +18,14 @@
     = @answer.description
   %p
     %b Answered at:
-    = @answer.created_at
+    = @answer.created_at.strftime('%d/%m/%y: %H:%M %p')
 - else
   %i Waiting for the Doctor to provide an answer to your question
 
-%br
-= link_to 'Back', patient_questions_path(@patient)
-- if @answer.blank?
-  = link_to 'Edit', edit_patient_question_path(@question)
+%hr
+.buttons
+  = link_to 'Back', patient_questions_path(@patient), class: 'btn btn-info'
+  - if @answer.blank?
+    = link_to 'Edit', edit_patient_question_path(@question), class: 'btn btn-primary'
+  = link_to 'Delete', patient_question_path(id: @question), method: :delete, class: 'btn btn-danger',
+    'data-confirm': 'Are you sure you want to delete this unanswered question?'

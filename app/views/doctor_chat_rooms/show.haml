@@ -47,7 +47,8 @@
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
-        = link_to 'End Session', doctor_chat_room_end_session_path(chat_room_id: @chat_room.id), class: 'btn btn-danger'
+        = link_to 'End Session', doctor_chat_room_end_session_path(chat_room_id: @chat_room.id),
+          class: 'btn btn-danger', 'data-confirm': 'Are you sure you want to end the session?'
 
         %button.btn.btn-primary#create-prescription{"data-target" => "#prescription", "data-toggle" => "modal",
           :type => "button"}

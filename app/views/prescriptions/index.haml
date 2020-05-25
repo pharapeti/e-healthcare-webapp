@@ -1,0 +1,14 @@
+%h3 Prescriptions
+%table.table.table-hover
+  %thead
+    %tr
+      %th Doctor
+      %th Prescribed at
+      %th
+  
+  %tbody
+    - @prescriptions.each do |prescription|
+      %tr
+        %td= prescription.doctor.name
+        %td= prescription.created_at.strftime('%d/%m/%y: %H:%M %p')
+        %td= link_to 'Show', patient_prescription_path(id: prescription.id)

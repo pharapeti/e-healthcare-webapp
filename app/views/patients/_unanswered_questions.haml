@@ -1,13 +1,11 @@
 %h3 Your unanswered questions
 
-%table
+%table.table.table-hover
   %thead
     %tr
       %th Doctor
       %th Description
-      %th
-      %th
-      %th
+      %th= link_to 'Ask a new question', new_patient_question_path, class: 'btn btn-primary'
   
   %tbody
     - @unanswered_questions.each do |question|
@@ -15,6 +13,3 @@
         %td= question.directed_to.name
         %td= question.description
         %td= link_to 'Show', patient_question_path(id: question)
-        %td= link_to 'Edit', edit_patient_question_path(id: question)
-        -#should only be deletable if it has not been answered
-        %td= link_to 'Destroy', patient_question_path(id: question), method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,5 +1,14 @@
 class PrescriptionsController < ApplicationController
+  layout 'patients/patients'
   before_action :accept_all_params
+  before_action :load_prescription, only: :show
+
+  def index
+    @prescriptions = Prescription.where(patient: current_user.patient).order(created_at: :desc)
+  end
+
+  def show
+  end
 
   def create
     @prescription =
@@ -26,5 +35,9 @@ class PrescriptionsController < ApplicationController
 
   def accept_all_params
     params.permit!
+  end
+
+  def load_prescription
+    @prescription = Prescription.find_by(id: params[:id])
   end
 end
