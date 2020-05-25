@@ -33,6 +33,7 @@ window.addEventListener('load', () =>{
         const chatMessageContainer = document.getElementById("chat_messages");
         chatMessageContainer.innerHTML = chatMessageContainer.innerHTML + html;
         chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight - chatMessageContainer.clientHeight;
+        chatMessageContainer.animate({ scrollTop: chatMessageContainer.prop('scrollHeight')}, 1000);
       }
     }
   });

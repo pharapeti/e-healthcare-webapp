@@ -1,6 +1,9 @@
 :coffee
   $ ->
-    $("#chat_messages").scrollTop = $("#chat_messages").scrollHeight
+    scrollToBottom = ->
+      $("#chat_messages").animate({ scrollTop: $("#chat_messages").prop('scrollHeight')}, 1000);
+    scrollToBottom()
+
     $('form#new_chat_message').on 'submit', (e) ->
       msg = $('input#chat_message_message').val()
       chatRoomID = $('input#chat_message_chat_room_id').val()
@@ -14,6 +17,7 @@
             chat_room_id: chatRoomID
           dataType: 'json'
           success: ->
+            scrollToBottom()
             $('input#chat_message_message').val ''
           fail: ->
             alert('Try again')
@@ -21,6 +25,10 @@
 
     $('input#chat_message_message').on 'input', (e) ->
       $('input.chat-input').toggleClass('disabled', e.target.value == "")
+
+    $('form#new_prescription').on 'submit', (e) ->
+      $('input#prescription_description').val ''
+      $('#prescription').modal('hide')
 
 #user-id{"data-user-id" => "#{current_user.id}" }
 #chat-room-id{"data-chat-room-id" => "#{@chat_room.id}"}
@@ -34,15 +42,19 @@
       .card-body
         %h5.card-title Information about the patient
         %p.card-text Description: #{@chat_room.request.description}
+        %p Patient: #{@chat_room.patient.name}
         - if @chat_room.request.media.attached?
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
         = link_to 'End Session', doctor_chat_room_end_session_path(chat_room_id: @chat_room.id), class: 'btn btn-danger'
 
-        %a.btn.btn-primary#create-prescription Provide a prescription
-  .col-9
-    .chat-room{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
+        %button.btn.btn-primary#create-prescription{"data-target" => "#prescription", "data-toggle" => "modal",
+          :type => "button"}
+          Provide a prescription
+  .col-9.card
+    .chat-room.card-body{"data-channel-subscribe" => "chat-room",
+      "data-chat-room-id" => "#{@chat_room.id}", style: 'padding:0'}
       #chat_messages
         - @chat_messages.each do |chat_message|
           - if chat_message.user == current_user
@@ -68,3 +80,22 @@
           %p.mb-1{"data-role" => "chat-message-text"}
           .text-right
             %small{"data-role" => "chat-message-date"}
+
+#prescription.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel",
+  :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title Provide a prescription
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        .prescription-form
+          = simple_form_for Prescription.new, remote: true do |form|
+            .input-group.mb-3
+              = form.input :description, as: :text, wrapper: false, label: false, include_blank: false,
+                placeholder: 'Type your prescription here...', input_html: { class: 'description-input' }
+            .input-group-append{style: 'float:right'}
+              = form.submit "Create", remote: true, class: 'btn btn-primary'
+            = form.input :doctor_id, as: :hidden, input_html: { value: @chat_room.doctor.id }
+            = form.input :patient_id, as: :hidden, input_html: { value: @chat_room.patient.id }

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :prescriptions
   devise_for :users, controllers: { registrations: "registrations" }
   devise_scope :users do
     get 'patients/register', to: 'patients/patient_registration#new', as: 'patient_registration'

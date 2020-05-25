@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_134829) do
+ActiveRecord::Schema.define(version: 2020_05_25_111336) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 2020_05_07_134829) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "prescriptions", force: :cascade do |t|
+    t.text "description"
+    t.integer "patient_id", null: false
+    t.integer "doctor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_prescriptions_on_doctor_id"
+    t.index ["patient_id"], name: "index_prescriptions_on_patient_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer "created_by_id", null: false
     t.integer "directed_to_id", null: false
@@ -169,6 +179,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_134829) do
   add_foreign_key "doctors", "practices"
   add_foreign_key "doctors", "users"
   add_foreign_key "patients", "users"
+  add_foreign_key "prescriptions", "doctors"
+  add_foreign_key "prescriptions", "patients"
   add_foreign_key "questions", "doctors", column: "directed_to_id"
   add_foreign_key "questions", "patients", column: "created_by_id"
   add_foreign_key "transcripts", "chat_rooms"
