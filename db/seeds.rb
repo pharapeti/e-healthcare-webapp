@@ -20,5 +20,33 @@ unanswered_question_1 = Question.create(created_by: patient, directed_to: doctor
 unanswered_question_2 = Question.create(created_by: patient, directed_to: doctor, description: 'Who goes there?')
 answer = Answer.create(question: answered_question, answered_by: doctor, description: 'Use some earbuds mate')
 
-chat = ChatRoom.create(urgent_request_id: '21', patient: patient, doctor: doctor)
-transcript = Transcripts.create(chat_room_id: chat)
+
+# In progress interaction
+urgent_request_in_progress =
+  UrgentRequest.create(
+    patient: patient, description: 'I need help Doctor, my blood pressure is very hight', status: :in_progress
+  )
+
+chat_room_in_progress = ChatRoom.create(urgent_request: urgent_request_in_progress, patient: patient, doctor: doctor)
+message1_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'Hi there doctor')
+message2_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Hello!')
+message3_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'I need help')
+message4_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: "How's can I help you?")
+message5_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: "Actually... don't worry about it")
+message6_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Ok, see you!')
+transcript_in_progress = Transcript.create(chat_room: chat_room_in_progress)
+
+# Finished interaction
+urgent_request_finished =
+  UrgentRequest.create(
+    patient: patient, description: 'I really need help, my heart rate is really high!', status: :finished
+  )
+
+chat_room_finished = ChatRoom.create(urgent_request: urgent_request_finished, patient: patient, doctor: doctor)
+message1 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'Hi there doctor')
+message2 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Hello!')
+message3 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'I need help')
+message4 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: "How's can I help you?")
+message5 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: "Actually... don't worry about it")
+message6 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Ok, see you!')
+transcript_finished = Transcript.create(chat_room: chat_room_finished)

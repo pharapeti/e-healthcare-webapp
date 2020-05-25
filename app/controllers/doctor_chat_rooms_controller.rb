@@ -16,6 +16,15 @@ class DoctorChatRoomsController < DoctorsController
   def create
   end
 
+  def end_session
+    @chat_room = ChatRoom.find(params[:chat_room_id])
+    associated_request = @chat_room.urgent_request.presence || @chat_room.consultation_request
+    associated_request.update(status: :finished)
+
+    ActionCable.server.broadcast "chat_room_channel_#{@chat_room.id}", action: 'end_session'
+    redirect_to root_path
+  end
+
   private
 
   def handle_urgent_request

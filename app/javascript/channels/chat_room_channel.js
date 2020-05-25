@@ -17,19 +17,23 @@ window.addEventListener('load', () =>{
     },
 
     received(data){
-      const user_element = document.getElementById('user-id');
-      const user_id = Number(user_element.getAttribute('data-user-id'));
-      let html;
-
-      if(user_id === data.chat_message.user_id){
-        html = data.mine;
+      if(data.action === 'end_session') {
+        window.location = '/';
       } else {
-        html = data.theirs;
-      }
+        const user_element = document.getElementById('user-id');
+        const user_id = Number(user_element.getAttribute('data-user-id'));
+        let html;
 
-      const chatMessageContainer = document.getElementById("chat_messages");
-      chatMessageContainer.innerHTML = chatMessageContainer.innerHTML + html;
-      chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight - chatMessageContainer.clientHeight;
+        if (user_id === data.chat_message.user_id) {
+          html = data.mine;
+        } else {
+          html = data.theirs;
+        }
+
+        const chatMessageContainer = document.getElementById("chat_messages");
+        chatMessageContainer.innerHTML = chatMessageContainer.innerHTML + html;
+        chatMessageContainer.scrollTop = chatMessageContainer.scrollHeight - chatMessageContainer.clientHeight;
+      }
     }
   });
 });

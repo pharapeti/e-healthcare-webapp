@@ -38,6 +38,8 @@
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
+        = link_to 'End Session', doctor_chat_room_end_session_path(chat_room_id: @chat_room.id), class: 'btn btn-danger'
+
         %a.btn.btn-primary#create-prescription Provide a prescription
   .col-9
     .chat-room{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}

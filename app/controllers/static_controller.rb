@@ -44,7 +44,7 @@ class StaticController < ApplicationController
     if @active_urgent_request.present?
       redirect_to doctor_connect_with_patient_path(
         doctor_id: @doctor.id,
-        urgent_request_id: @active_urgent_request&.urgent_request&.id
+        urgent_request_id: @active_urgent_request.first.urgent_request&.id
       )
     elsif @active_consultation_request.present?
       redirect_to doctor_connect_with_patient_path(

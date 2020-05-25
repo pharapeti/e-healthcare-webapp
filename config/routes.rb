@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get :profile
     get :connect_with_doctor, to: 'patient_chat_rooms#connect_with_doctor'
 
-    resources :chat_rooms
+    resources :chat_rooms do
+      get :end_session, to: 'patient_chat_rooms#end_session'
+    end
     resources :questions
     resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
@@ -30,7 +32,9 @@ Rails.application.routes.draw do
     get :profile
     get :connect_with_patient, to: 'doctor_chat_rooms#connect_with_patient'
 
-    resources :chat_rooms
+    resources :chat_rooms do
+      get :end_session, to: 'doctor_chat_rooms#end_session'
+    end
     resources :transcripts, controller: 'doctors/transcripts'
     resources :consultation_requests, controller: 'doctors/consultation_request'
     root to: 'doctors#index'

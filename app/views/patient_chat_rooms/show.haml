@@ -4,7 +4,7 @@
     $('form#new_chat_message').on 'submit', (e) ->
       msg = $('input#chat_message_message').val()
       chatRoomID = $('input#chat_message_chat_room_id').val()
-  
+
       if msg != ''
         $.ajax
           type: 'POST'
@@ -39,6 +39,8 @@
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
+        = link_to 'End Session', patient_chat_room_end_session_path(chat_room_id: @chat_room.id), class: 'btn btn-danger'
+
   .col-9
     .chat-room{"data-channel-subscribe" => "chat-room", "data-chat-room-id" => "#{@chat_room.id}"}
       #chat_messages
