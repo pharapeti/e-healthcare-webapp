@@ -16,5 +16,7 @@
 
 = link_to 'Back', patient_consultation_requests_path(current_user.patient), class: 'btn btn-info'
 = link_to 'Edit', edit_patient_consultation_request_path(id: @consultation_request), class: 'btn btn-primary'
+= link_to 'Cancel', patient_consultation_request_path(id: @consultation_request), method: :delete,
+  data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 = link_to 'Join session',
   patient_connect_with_doctor_path(consultation_request_id: @consultation_request.id), class: 'btn btn-success'

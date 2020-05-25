@@ -21,20 +21,61 @@ unanswered_question_2 = Question.create(created_by: patient, directed_to: doctor
 answer = Answer.create(question: answered_question, answered_by: doctor, description: 'Use some earbuds mate')
 
 
-# In progress interaction
-urgent_request_in_progress =
-  UrgentRequest.create(
-    patient: patient, description: 'I need help Doctor, my blood pressure is very hight', status: :in_progress
+# CONSULTATION REQUESTS
+
+# scheduled
+ConsultationRequest.create(
+  patient: patient, directed_to: doctor, description: 'Just wanted to have my weekly checkup with you',
+  scheduled_for: 1.week.from_now, status: :scheduled
+)
+
+# in progress
+consultation_request_ip =
+  ConsultationRequest.create(
+    patient: patient, directed_to: doctor, description: 'Just wanted to have my daily checkup with you',
+    scheduled_for: 1.week.from_now, status: :in_progress
   )
 
-chat_room_in_progress = ChatRoom.create(urgent_request: urgent_request_in_progress, patient: patient, doctor: doctor)
-message1_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'Hi there doctor')
-message2_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Hello!')
-message3_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'I need help')
-message4_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: "How's can I help you?")
-message5_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: "Actually... don't worry about it")
-message6_ip = ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Ok, see you!')
-transcript_in_progress = Transcript.create(chat_room: chat_room_in_progress)
+chat_room_ip = ChatRoom.create(consultation_request: consultation_request_ip, patient: patient, doctor: doctor)
+ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'Hi there doctor')
+ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: 'Hello!')
+ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'I need help')
+ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: "How's can I help you?")
+ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: "Actually... don't worry about it")
+ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: 'Ok, see you!')
+
+# completed
+cr_finished =
+  ConsultationRequest.create(
+    patient: patient, directed_to: doctor, description: 'Just wanted to have my daily checkup with you',
+    scheduled_for: 1.week.from_now, status: :finished
+  )
+
+chat_r_finished = ChatRoom.create(consultation_request: cr_finished, patient: patient, doctor: doctor)
+ChatMessage.create(chat_room: chat_r_finished, user: patient_user, message: 'Hi there doctor')
+ChatMessage.create(chat_room: chat_r_finished, user: doctor_user, message: 'Hello!')
+ChatMessage.create(chat_room: chat_r_finished, user: patient_user, message: 'I need help')
+ChatMessage.create(chat_room: chat_r_finished, user: doctor_user, message: "How's can I help you?")
+ChatMessage.create(chat_room: chat_r_finished, user: patient_user, message: "Actually... don't worry about it")
+ChatMessage.create(chat_room: chat_r_finished, user: doctor_user, message: 'Ok, see you!')
+
+
+# URGENT REQUESTS
+
+# In progress interaction
+# urgent_request_in_progress =
+#   UrgentRequest.create(
+#     patient: patient, description: 'I need help Doctor, my blood pressure is very hight', status: :in_progress
+#   )
+#
+# chat_room_in_progress = ChatRoom.create(urgent_request: urgent_request_in_progress, patient: patient, doctor: doctor)
+# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'Hi there doctor')
+# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Hello!')
+# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'I need help')
+# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: "How's can I help you?")
+# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: "Actually... don't worry about it")
+# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Ok, see you!')
+# Transcript.create(chat_room: chat_room_in_progress)
 
 # Finished interaction
 urgent_request_finished =

@@ -2,10 +2,19 @@
   $ ->
     $('.company-name').on 'click', ->
       window.location.href = '/'
+      
+:sass
+  .in-session-alert
+    margin-left: 35vw
 
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
   #company-name
     E healthcare
+  
+  - if current_user.doctor.in_session?
+    .in-session-alert
+      %b You are current in a session with a Patient
+
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.ml-auto.mt-2.mt-lg-0
       .dropdown
