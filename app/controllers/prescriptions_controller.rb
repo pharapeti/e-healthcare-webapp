@@ -13,7 +13,7 @@ class PrescriptionsController < ApplicationController
   def create
     @prescription =
       Prescription.new(
-        description: params['description'],
+        description: params['prescription']['description'],
         doctor: Doctor.find(params['prescription']['doctor_id'].to_i),
         patient: Patient.find(params['prescription']['patient_id'].to_i)
       )

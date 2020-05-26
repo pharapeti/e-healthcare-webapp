@@ -6,7 +6,7 @@
   = @consultation_request.directed_to.name
 %p
   %b Scheduled for:
-  = @consultation_request.scheduled_for
+  = @consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')
 %p
   %b Attachment:
   - if @consultation_request.media.attached?
