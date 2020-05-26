@@ -2,15 +2,22 @@
   $ ->
     $('.company-name').on 'click', ->
       window.location.href = '/'
-      
+
 :sass
   .in-session-alert
-    margin-left: 35vw
+    margin-left: 30vw
+
+  #company-logo
+    margin: 5px
+
+  #company-name
+    margin-left: 10px
 
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+  = image_tag 'logos/favicon-32x32', id: 'company-logo'
   #company-name
-    E healthcare
-  
+    %b E-Health
+
   - if current_user.doctor.in_session?
     .in-session-alert
       %b You are current in a session with a Patient

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :chat_messages
   resources :practices
   resources :license_activations
+  resources :prescriptions, controller: 'prescriptions'
 
   resources :patients do
     get :dashboard, to: 'patients#dashboard', as: 'dashboard'
@@ -21,7 +22,6 @@ Rails.application.routes.draw do
       get :end_session, to: 'patient_chat_rooms#end_session'
     end
     resources :questions
-    resources :prescriptions, controller: 'prescriptions'
     resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
     resources :urgent_requests, controller: 'urgent_requests'
