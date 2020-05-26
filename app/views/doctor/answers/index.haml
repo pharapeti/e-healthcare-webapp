@@ -13,11 +13,14 @@
         %tr
           %td= question.created_by.user.email
           %td= question.description
-          %td= distance_of_time_in_words(question.created_at, Time.now)
+          %td= "#{distance_of_time_in_words(question.created_at, Time.now)} ago"
           %td= link_to 'Answer', new_doctor_answer_path(question_id: question.id)
   %br
 - else
-  %bYou have no unanswered questions!
+  %h2 Unanswered questions
+  %i You have no unanswered questions!
+
+%br
 
 %h2 Questions you have answered
 %table.table.table-hover
@@ -26,7 +29,7 @@
       %th Asked by
       %th Question
       %th Your answer
-      %th Time
+      %th Answered
       %th
 
   %tbody
@@ -35,6 +38,6 @@
         %td= answer.question.created_by.user.email
         %td= answer.question.description
         %td= answer.description
-        %td= answer.created_at
+        %td= "#{distance_of_time_in_words(answer.created_at, Time.now)} ago"
         %td= link_to 'Show', doctor_answer_path(answer)
   %br

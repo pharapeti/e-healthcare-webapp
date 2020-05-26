@@ -7,7 +7,7 @@ class ConsultationRequestsController < ApplicationController
 
   def index
     @upcoming_consultation_requests = ConsultationRequest.left_outer_joins(:chat_room).where(patient: current_user.patient, chat_rooms: { consultation_request_id: nil })
-    @previous_consulation_requests = ConsultationRequest.joins(:chat_room).where(patient: current_user.patient)
+    @previous_consultation_requests = ConsultationRequest.where(patient: current_user.patient, status: :finished)
   end
 
   def show

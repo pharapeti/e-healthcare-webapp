@@ -43,6 +43,7 @@ ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'I need
 ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: "How's can I help you?")
 ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: "Actually... don't worry about it")
 ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: 'Ok, see you!')
+Transcript.create(chat_room: chat_room_ip)
 
 # completed
 cr_finished =
@@ -61,22 +62,6 @@ ChatMessage.create(chat_room: chat_r_finished, user: doctor_user, message: 'Ok, 
 
 
 # URGENT REQUESTS
-
-# In progress interaction
-# urgent_request_in_progress =
-#   UrgentRequest.create(
-#     patient: patient, description: 'I need help Doctor, my blood pressure is very hight', status: :in_progress
-#   )
-#
-# chat_room_in_progress = ChatRoom.create(urgent_request: urgent_request_in_progress, patient: patient, doctor: doctor)
-# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'Hi there doctor')
-# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Hello!')
-# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: 'I need help')
-# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: "How's can I help you?")
-# ChatMessage.create(chat_room: chat_room_in_progress, user: patient_user, message: "Actually... don't worry about it")
-# ChatMessage.create(chat_room: chat_room_in_progress, user: doctor_user, message: 'Ok, see you!')
-# Transcript.create(chat_room: chat_room_in_progress)
-
 # Finished interaction
 urgent_request_finished =
   UrgentRequest.create(
@@ -84,10 +69,29 @@ urgent_request_finished =
   )
 
 chat_room_finished = ChatRoom.create(urgent_request: urgent_request_finished, patient: patient, doctor: doctor)
-message1 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'Hi there doctor')
-message2 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Hello!')
-message3 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'I need help')
-message4 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: "How's can I help you?")
-message5 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: "Actually... don't worry about it")
-message6 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Ok, see you!')
-transcript_finished = Transcript.create(chat_room: chat_room_finished)
+ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'Hi there doctor')
+ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Hello!')
+ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: 'I need help')
+ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: "How's can I help you?")
+ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: "Actually... don't worry about it")
+ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Ok, see you!')
+Transcript.create(chat_room: chat_room_finished)
+
+# Attachments
+consultation_request_ip.media.attach(
+  io: File.open('app/assets/images/test_images/neck_pain.jpg'),
+  filename: 'neck_pain.jpg',
+  content_type: 'image/jpg'
+)
+
+cr_finished.media.attach(
+  io: File.open('app/assets/images/test_images/leg_pain.jpg'),
+  filename: 'leg_pain.jpg',
+  content_type: 'image/jpg'
+)
+
+urgent_request_finished.media.attach(
+  io: File.open('app/assets/images/test_images/arm_pain.jpg'),
+  filename: 'arm_pain.jpg',
+  content_type: 'image/jpg'
+)
