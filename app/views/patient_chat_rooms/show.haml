@@ -25,6 +25,21 @@
   
     $('input#chat_message_message').on 'input', (e) ->
       $('input.chat-input').toggleClass('disabled', e.target.value == "")
+      
+    $('#send_transcript').on 'click', ->
+      url = "#{patient_chat_room_send_transcript_path(chat_room_id: '-chat-room-id').html_safe}"
+      url.replace('-chat-room-id', "#{@chat_room.id}")
+    
+      $.ajax
+        type: 'POST'
+        url: url
+        data:
+          id: "#{@chat_room.id}"
+        dataType: 'json'
+        success: ->
+          console.log('success')
+        fail: ->
+          console.log('fail')
 
 #user-id{"data-user-id" => "#{current_user.id}" }
 #chat-room-id{"data-chat-room-id" => "#{@chat_room.id}"}
@@ -48,6 +63,9 @@
             = image_tag @chat_room.request.media.variant(resize: "200x200")
         = link_to 'End Session', patient_chat_room_end_session_path(chat_room_id: @chat_room.id),
           class: 'btn btn-danger', 'data-confirm': 'Are you sure you want to end the session?'
+  
+        %button.btn.btn-info#send_transcript
+          Email transcript
 
   .col-9.card
     .chat-room.card-body{"data-channel-subscribe" => "chat-room",

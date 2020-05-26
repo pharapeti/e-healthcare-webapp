@@ -1,6 +1,6 @@
 class DoctorChatRoomsController < DoctorsController
   before_action :accept_all_params
-  before_action :load_chat_room, only: [:show]
+  before_action :load_chat_room, only: %i[show send_transcript]
 
   # This action creates a chat_room associated to the request the user is navigating from
   def connect_with_patient
@@ -14,6 +14,15 @@ class DoctorChatRoomsController < DoctorsController
   end
 
   def create
+  end
+
+  def send_transcript
+    @transcript = Transcript.find_by(chat_room: @chat_room)
+    @transcript = Transcript.create(chat_room: @chat_room) if @transcript.blank?
+
+    TranscriptMailer.with(transcript: @transcript).chat_transcript.deliver_now
+
+    render json: {}, status: :ok
   end
 
   def end_session
