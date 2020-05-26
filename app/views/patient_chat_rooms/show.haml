@@ -34,9 +34,13 @@
   .col-3
     .card
       .card-body
-        %h5.card-title Information about your request
-        %p.card-text Description: #{@chat_room.request.description}
-        %p Doctor: #{@chat_room.doctor.name}
+        %h5.card-title Related information
+        %p.card-text
+          %b Description:
+          = @chat_room.request.description
+        %p
+          %b Doctor:
+          = @chat_room.doctor.name
 
         - if @chat_room.request.media.attached?
           %p.card-text
