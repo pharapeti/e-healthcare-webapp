@@ -1,3 +1,11 @@
+:sass
+  .image
+    border: 1px solid black
+    margin: 8px
+    -webkit-box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75)
+    -moz-box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75)
+    box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.75)
+
 - if session[:doctor_id] || session[:creating_patient]
   %h2 Signing up as a #{ session[:doctor_id] ? 'Doctor' : 'Patient' }
   = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -14,7 +22,17 @@
       = link_to 'I meant to sign up as a Doctor', doctor_registration_path, class: 'btn btn-danger' if session[:creating_patient]
       = f.button :submit, "Sign up", class: 'btn btn-success'
 - else
-  .btn-group-lg
-  = link_to 'Sign up as a Patient', patient_registration_path, class: 'btn btn-primary'
-  = link_to 'Sign up as a Doctor', doctor_registration_path, class: 'btn btn-primary'
-  = render "devise/shared/links"
+  .d-flex.align-content-center.justify-content-center.p-lg-3
+    #patientCard
+      .image
+        = image_tag 'patient', width: '300px', height: '300px', style: 'padding:15px'
+      .d-flex.align-content-center.justify-content-center
+        = link_to 'Sign up as a Patient', patient_registration_path, class: 'btn btn-primary', style: 'margin-top:10px'
+    #doctorCard
+      .image
+        = image_tag 'doctor', width: '300px', height: '300px'
+      .d-flex.align-content-center.justify-content-center
+        = link_to 'Sign up as a Doctor', doctor_registration_path, class: 'btn btn-primary', style: 'margin-top:10px'
+
+  .d-flex.align-content-center.justify-content-center.p-lg-2
+    = render "devise/shared/links"

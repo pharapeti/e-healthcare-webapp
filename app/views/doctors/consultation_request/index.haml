@@ -1,7 +1,40 @@
 - if @upcoming_consultation_requests.present?
-  = @upcoming_consultation_requests
+  %h3 Upcoming consultations
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Description
+        %th Patient
+        %th Scheduled for
+    
+    %tbody
+    - @upcoming_consultation_requests.each do |consultation_request|
+      %tr
+        %td= consultation_request.description
+        %td= consultation_request.patient.name
+        %td= consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')
 - else
+  %h3 Upcoming consultations
   %i You have no upcoming consultations
 
-- if @past_consultation_requests.present?
-  = @past_consultation_requests
+%br
+
+- if @previous_consulation_requests.present?
+  %hr
+  %h3 Previous consultations
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Description
+        %th Patient
+        %th Scheduled for
+  
+    %tbody
+    - @previous_consulation_requests.each do |consultation_request|
+      %tr
+        %td= consultation_request.description
+        %td= consultation_request.patient.name
+        %td= consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')
+- else
+  %h3 Previous consultations
+  %i You have no past consultations

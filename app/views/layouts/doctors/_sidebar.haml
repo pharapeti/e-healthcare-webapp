@@ -1,6 +1,32 @@
+:coffee
+  $ ->
+    found = false
+
+    if window.location.pathname.indexOf('consultation_requests') >= 0
+      $('#consultation-request-item').addClass('on-page')
+      found = true
+
+    if window.location.pathname.indexOf('answers') >= 0
+      $('#question-item').addClass('on-page')
+      found = true
+
+    if window.location.pathname.indexOf('transcripts') >= 0
+      $('#transcript-item').addClass('on-page')
+      found = true
+
+    if !found then $('#home-item').addClass('on-page')
+
+:sass
+  .on-page
+    font-weight: bold
+
+
 #sidebar-wrapper.bg-light
   .list-group.list-group-flush
-    = link_to 'Home', root_path, class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Consultations', doctor_consultation_requests_path(doctor_id: current_user.doctor), class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Questions', doctor_answers_path(doctor_id: current_user.doctor), class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Transcripts', doctor_transcripts_path(doctor_id: current_user.doctor), class: 'list-group-item list-group-item-action bg-light'
+    = link_to 'Home', root_path, class: 'list-group-item list-group-item-action bg-light', id: 'home-item'
+    = link_to 'Consultations', doctor_consultation_requests_path(doctor_id: current_user.doctor),
+      class: 'list-group-item list-group-item-action bg-light', id: 'consultation-request-item'
+    = link_to 'Questions', doctor_answers_path(doctor_id: current_user.doctor),
+      class: 'list-group-item list-group-item-action bg-light', id: 'question-item'
+    = link_to 'Transcripts', doctor_transcripts_path(doctor_id: current_user.doctor),
+      class: 'list-group-item list-group-item-action bg-light', id: 'transcript-item'

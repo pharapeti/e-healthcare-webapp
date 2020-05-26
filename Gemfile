@@ -27,6 +27,7 @@ gem 'cancan'
 gem 'simple_form'
 gem 'coffee-rails'
 gem "bootstrap_form", "~> 4.0"
+gem 'bootstrap-email'
 gem "mini_magick"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -48,6 +49,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry', '~> 0.12.2'
+  gem 'letter_opener'
 end
 
 group :test do

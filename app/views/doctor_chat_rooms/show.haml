@@ -29,30 +29,57 @@
     $('form#new_prescription').on 'submit', (e) ->
       $('input#prescription_description').val ''
       $('#prescription').modal('hide')
+    
+    $('#send_transcript').on 'click', ->
+      url = "#{doctor_chat_room_send_transcript_path(chat_room_id: '-chat-room-id').html_safe}"
+      url.replace('-chat-room-id', "#{@chat_room.id}")
+    
+      $.ajax
+        type: 'POST'
+        url: url
+        data:
+          id: "#{@chat_room.id}"
+        dataType: 'json'
+        success: ->
+          console.log('success')
+        fail: ->
+          console.log('fail')
+
+:sass
+  .margin-top
+    margin-top: 5px
+
 
 #user-id{"data-user-id" => "#{current_user.id}" }
 #chat-room-id{"data-chat-room-id" => "#{@chat_room.id}"}
-%h4
-  You are speaking with a patient with the username: #{@chat_room.patient.name}
 
 %br
 .row
   .col-3
     .card
       .card-body
-        %h5.card-title Information about the patient
-        %p.card-text Description: #{@chat_room.request.description}
-        %p Patient: #{@chat_room.patient.name}
+        %h5.card-title Related information
+        %p.card-text
+          %b Description:
+          = @chat_room.request.description
+        %p
+          %b Patient:
+          = @chat_room.patient.name
+
         - if @chat_room.request.media.attached?
           %p.card-text
             %b Attachment:
             = image_tag @chat_room.request.media.variant(resize: "200x200")
         = link_to 'End Session', doctor_chat_room_end_session_path(chat_room_id: @chat_room.id),
-          class: 'btn btn-danger', 'data-confirm': 'Are you sure you want to end the session?'
+          class: 'btn btn-danger margin-top', 'data-confirm': 'Are you sure you want to end the session?'
 
-        %button.btn.btn-primary#create-prescription{"data-target" => "#prescription", "data-toggle" => "modal",
+        %button.btn.btn-primary.margin-top#create-prescription{"data-target" => "#prescription", "data-toggle" => "modal",
           :type => "button"}
           Provide a prescription
+          
+        %button.btn.btn-info.margin-top#send_transcript
+          Email transcript
+
   .col-9.card
     .chat-room.card-body{"data-channel-subscribe" => "chat-room",
       "data-chat-room-id" => "#{@chat_room.id}", style: 'padding:0'}

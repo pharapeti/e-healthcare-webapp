@@ -13,6 +13,6 @@
         %tr
           %td= prescription.doctor.name
           %td= prescription.created_at.strftime('%d/%m/%y: %H:%M %p')
-          %td= link_to 'Show', patient_prescription_path(id: prescription.id)
+          %td= link_to 'Show', prescription_path(id: prescription.id)
 - else
   %i You have no prescriptions
