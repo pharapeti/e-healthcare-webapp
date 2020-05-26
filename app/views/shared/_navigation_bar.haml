@@ -1,3 +1,11 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+:sass
+  #company-logo
+    margin: 5px
+
   #company-name
-    E healthcare
+    margin-left: 10px
+
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+  = image_tag 'logos/favicon-32x32', id: 'company-logo'
+  #company-name
+    %b E-Health
