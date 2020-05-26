@@ -1,5 +1,27 @@
 - if @transcripts.present?
-  - @transcripts.each do |transcript|
-    = transcript.chat_room_id
+  %h3 Your Previous Transcripts
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Doctor
+        %th Description
+        %th Transcript creation time 
+        %th 
+
+    %tbody
+      - @transcripts.each do |transcript|
+        - if transcript.chat_room.urgent_request.description.present?
+          %tr
+            %td= transcript.chat_room.doctor.name           
+            %td= transcript.chat_room.urgent_request.description         
+            %td= transcript.updated_at
+            %td= link_to 'Show', patient_transcript_path(id: transcript)
+        - else 
+          %tr
+            %td= transcript.chat_room.doctor.name  
+            %td= transcript.chat_room.consultation_request.description        
+            %td= transcript.updated_at
+            %td= link_to 'Show', patient_transcript_path(id: transcript)
 - else
-  There are no transcripts associated to you
+  %h3 There are no transcripts associated to you
+  
