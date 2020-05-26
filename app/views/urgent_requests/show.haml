@@ -6,8 +6,10 @@
   %b Description:
   = @urgent_request.description
 
-= link_to 'Continue', patient_chat_room_path
+= link_to 'Continue',root_path
 \|
 = link_to 'Edit', edit_patient_urgent_request_path(@urgent_request)
 \|
 = link_to 'Back', 'javascript:history.back()'
+
+= button_to 'Destroy',patient_urgent_request_path(id: @urgent_request), method: :delete, data: { confirm: 'Are you sure?' }

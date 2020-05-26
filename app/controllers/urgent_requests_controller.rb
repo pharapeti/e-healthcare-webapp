@@ -46,6 +46,12 @@ class UrgentRequestsController < ApplicationController
   end
 
   def destroy
+
+    @urgent_request.destroy
+    respond_to do |format|
+      format.html { redirect_to patient_urgent_request_path(id: @urgent_request), notice: 'Urgent Request was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
