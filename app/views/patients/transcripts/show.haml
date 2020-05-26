@@ -1,12 +1,12 @@
 %p
   %b Description:
-  = @transcript.chat_room.urgent_request.description     
+  = @transcript.chat_room.request.description     
 %p
   %b Doctor:
   = @transcript.chat_room.doctor.name 
 %p
   %b Transcript creation time:
-  = @transcript.updated_at
+  = @transcript.updated_at.strftime('%d/%m/%y: %H:%M %p')
 %p
   %b Chat:
 

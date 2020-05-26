@@ -10,18 +10,12 @@
 
     %tbody
       - @transcripts.each do |transcript|
-        - if transcript.chat_room.urgent_request.description.present?
-          %tr
-            %td= transcript.chat_room.patient.name           
-            %td= transcript.chat_room.urgent_request.description         
-            %td= transcript.updated_at
-            %td= link_to 'Show', patient_transcript_path(id: transcript)
-        - else 
-          %tr
-            %td= transcript.chat_room.doctor.name  
-            %td= transcript.chat_room.consultation_request.description        
-            %td= transcript.updated_at
-            %td= link_to 'Show', patient_transcript_path(id: transcript)
+        %tr
+          %td= transcript.chat_room.patient.name           
+          %td= transcript.chat_room.request.description         
+          %td= transcript.updated_at.strftime('%d/%m/%y: %H:%M %p')
+          %td= link_to 'Show', doctor_transcript_path(id: transcript)
+
 - else
   %h3 There are no transcripts associated to you
   
