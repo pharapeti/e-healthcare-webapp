@@ -1,9 +1,16 @@
+:coffee
+  $ ->
+    $('#company-name, #company-logo').on 'click', ->
+        window.location.href = '/'
+
 :sass
   #company-logo
     margin: 5px
+    cursor: pointer
 
   #company-name
     margin-left: 10px
+    cursor: pointer
 
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
   = image_tag 'logos/favicon-32x32', id: 'company-logo'

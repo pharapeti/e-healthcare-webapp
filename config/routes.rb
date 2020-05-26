@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
     get 'doctors/register', to: 'doctors/doctor_registration#new', as: 'doctor_registration'
     post 'doctors/register', to: 'doctors/doctor_registration#create'
+
+    get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
   resources :chat_messages
