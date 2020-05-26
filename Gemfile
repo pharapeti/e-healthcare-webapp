@@ -27,6 +27,7 @@ gem 'cancan'
 gem 'simple_form'
 gem 'coffee-rails'
 gem "bootstrap_form", "~> 4.0"
+gem 'bootstrap-email'
 gem "mini_magick"
 
 # Reduces boot times through caching; required in config/boot.rb
