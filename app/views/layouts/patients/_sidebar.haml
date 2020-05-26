@@ -1,7 +1,38 @@
+:coffee
+  $ ->
+    found = false
+
+    if window.location.pathname.indexOf('consultation_requests') >= 0
+      $('#consultation-request-item').addClass('on-page')
+      found = true
+
+    if window.location.pathname.indexOf('questions') >= 0
+      $('#question-item').addClass('on-page')
+      found = true
+
+    if window.location.pathname.indexOf('prescriptions') >= 0
+      $('#prescription-item').addClass('on-page')
+      found = true
+
+    if window.location.pathname.indexOf('transcripts') >= 0
+      $('#transcript-item').addClass('on-page')
+      found = true
+      
+    if !found then $('#home-item').addClass('on-page')
+
+:sass
+  .on-page
+    font-weight: bold
+
+
 #sidebar-wrapper.bg-light
   .list-group.list-group-flush
-    = link_to 'Home', root_path, class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Consultations', patient_consultation_requests_path(current_user.patient), class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Questions', patient_questions_path(current_user.patient), class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Prescriptions', patient_prescriptions_path(current_user.patient), class: 'list-group-item list-group-item-action bg-light'
-    = link_to 'Transcripts', patient_transcripts_path, class: 'list-group-item list-group-item-action bg-light'
+    = link_to 'Home', root_path, class: 'list-group-item list-group-item-action bg-light', id: 'home-item'
+    = link_to 'Consultations', patient_consultation_requests_path(current_user.patient),
+      class: 'list-group-item list-group-item-action bg-light', id: 'consultation-request-item'
+    = link_to 'Questions', patient_questions_path(current_user.patient),
+      class: 'list-group-item list-group-item-action bg-light', id: 'question-item'
+    = link_to 'Prescriptions', prescriptions_path(patient_id: current_user.patient.id),
+      class: 'list-group-item list-group-item-action bg-light', id: 'prescription-item'
+    = link_to 'Transcripts', patient_transcripts_path(patient_id: current_user.patient.id),
+      class: 'list-group-item list-group-item-action bg-light', id: 'transcript-item'

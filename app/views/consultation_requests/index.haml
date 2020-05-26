@@ -1,13 +1,14 @@
-%h3 Consultation Requests
-
 - if @upcoming_consultation_requests.present?
   = render partial: 'upcoming'
 - else
-  %i
-    You have no upcoming consultations
+  %i You have no upcoming consultations
   %br
 
-- if @past_consultation_requests.present?
-  = render partial: 'previous' if @past_consultation_requests
+- if @previous_consultation_requests.present?
+  = render partial: 'previous'
+- else
+  %i You have no past consultations
+  %br
 
+%br
 = link_to 'Book a consultation', new_patient_consultation_request_path(current_user.patient)

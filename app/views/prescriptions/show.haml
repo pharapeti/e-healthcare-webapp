@@ -1,6 +1,11 @@
+%h3 About this prescription
+
 %p
   %b Doctor:
   = @prescription.doctor.name
 %p
   %b Description:
   = @prescription.description
+%p
+  %b Prescribed to you at:
+  = @prescription.created_at.strftime('%d/%m/%y: %H:%M %p')
