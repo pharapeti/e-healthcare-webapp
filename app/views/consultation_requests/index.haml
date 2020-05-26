@@ -1,13 +1,10 @@
-%h3 Consultation Requests
-%hr
-
 - if @upcoming_consultation_requests.present?
   = render partial: 'upcoming'
 - else
   %i You have no upcoming consultations
   %br
 
-- if @past_consultation_requests.present?
+- if @previous_consultation_requests.present?
   = render partial: 'previous'
 - else
   %i You have no past consultations

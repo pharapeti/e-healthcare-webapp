@@ -43,6 +43,7 @@ ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'I need
 ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: "How's can I help you?")
 ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: "Actually... don't worry about it")
 ChatMessage.create(chat_room: chat_room_ip, user: doctor_user, message: 'Ok, see you!')
+transcript_f = Transcript.create(chat_room: chat_room_ip)
 
 # completed
 cr_finished =
@@ -91,3 +92,22 @@ message4 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, 
 message5 = ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: "Actually... don't worry about it")
 message6 = ChatMessage.create(chat_room: chat_room_finished, user: doctor_user, message: 'Ok, see you!')
 transcript_finished = Transcript.create(chat_room: chat_room_finished)
+
+
+consultation_request_ip.media.attach(
+  io: File.open('app/assets/images/test_images/neck_pain.jpg'),
+  filename: 'neck_pain.jpg',
+  content_type: 'image/jpg'
+)
+
+cr_finished.media.attach(
+  io: File.open('app/assets/images/test_images/leg_pain.jpg'),
+  filename: 'leg_pain.jpg',
+  content_type: 'image/jpg'
+)
+
+urgent_request_finished.media.attach(
+  io: File.open('app/assets/images/test_images/arm_pain.jpg'),
+  filename: 'arm_pain.jpg',
+  content_type: 'image/jpg'
+)

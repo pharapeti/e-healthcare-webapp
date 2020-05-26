@@ -11,6 +11,8 @@ module EHealthcareWebapp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.time_zone = 'Sydney'
+    config.active_storage.replace_on_assign_to_many = false
+    config.active_storage.service = :local
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
