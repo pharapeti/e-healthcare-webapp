@@ -24,4 +24,5 @@
   .field
     = f.text_area :description, required: true
   .actions
-    = f.submit 'Submit question', class: 'btn-primary'
+    = link_to 'Back', patient_questions_path(@patient), class: 'btn btn-info'
+    = f.submit 'Submit question', class: 'btn btn-primary'

@@ -5,7 +5,12 @@ class TranscriptMailer < ApplicationMailer
     return unless params[:transcript].present?
 
     @transcript = params[:transcript]
-    @doctor_name = @transcript.chat_room.request&.directed_to&.name
+    @doctor_name = nil
+
+    if @transcript.chat_room.request.respond_to?(:directed_to)
+      @doctor_name = @transcript.chat_room.request&.directed_to&.name
+    end
+
     @subject = @doctor_name.present? ? "Transcript for meeting with #{@doctor_name}" : 'Transcript for meeting'
 
     make_bootstrap_mail(

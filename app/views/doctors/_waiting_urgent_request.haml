@@ -1,5 +1,17 @@
 :ruby
   path = doctor_accept_urgent_request_path(id: @doctor, urgent_request_id: @waiting_urgent_request.id)
+  
+:sass
+  .noticeCard
+    background-color: lightblue
+    margin-left: 10px
+    padding: 10px 10px 0 10px
+    max-width: 300px
 
-%b A patient needs your help!
-= link_to 'Help the patient', path, class: 'btn btn-success'
+.card.noticeCard
+  %p
+    A patient needs your help and is waiting for assistance.
+  %p
+    = link_to 'I can help them', path, class: 'btn btn-primary'
+  
+%br
