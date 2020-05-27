@@ -27,12 +27,16 @@ Rails.application.routes.draw do
     resources :questions
     resources :transcripts, controller: 'patients/transcripts'
     resources :consultation_requests, controller: 'consultation_requests'
-    resources :urgent_requests, controller: 'urgent_requests'
+    resources :urgent_requests, controller: 'urgent_requests' do
+      get :wait_screen
+      get :check_for_session_start
+    end
     root to: 'patients#index'
   end
 
   resources :doctors do
     get :dashboard, to: 'doctors#dashboard', as: 'dashboard'
+    get :accept_urgent_request, to: 'doctors#accept_urgent_request', as: 'accept_urgent_request'
     get :profile
     get :connect_with_patient, to: 'doctor_chat_rooms#connect_with_patient'
 

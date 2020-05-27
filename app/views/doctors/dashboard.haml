@@ -1,4 +1,8 @@
 %h1 Your personalised dashboard
+%br
+
+- if @waiting_urgent_request.present?
+  = render partial: 'waiting_urgent_request'
 
 - if @upcoming_consultations.present?
   = render partial: 'upcoming_consultations'

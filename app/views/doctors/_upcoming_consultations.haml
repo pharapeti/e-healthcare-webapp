@@ -11,4 +11,4 @@
       %tr
         %td= consultation_request.patient.name
         %td= consultation_request.description
-        %td= consultation_request.scheduled_for
+        %td= consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')

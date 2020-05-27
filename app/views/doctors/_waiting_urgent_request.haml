@@ -1,0 +1,5 @@
+:ruby
+  path = doctor_accept_urgent_request_path(id: @doctor, urgent_request_id: @waiting_urgent_request.id)
+
+%b A patient needs your help!
+= link_to 'Help the patient', path, class: 'btn btn-success'

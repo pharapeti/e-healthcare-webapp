@@ -1,0 +1,19 @@
+:coffee
+  $ ->
+    checkForSessionStart = ->
+      $.ajax(
+        url: "#{patient_urgent_request_check_for_session_start_path(urgent_request_id: @urgent_request.id)}"
+        method: 'GET'
+        dataType: 'JSON'
+        data:
+          urgent_request_id: "#{@urgent_request.id}"
+        ).fail(->
+          setTimeout(checkForSessionStart, 1000)
+          console.log('Session has not started yet')
+        ).done((data) ->
+          window.location = data.address;
+        )
+      
+    checkForSessionStart()
+
+We be waiting

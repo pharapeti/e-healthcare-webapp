@@ -1,7 +1,7 @@
 class UrgentRequestsController < ApplicationController
   layout 'patients/patients'
   skip_before_action :verify_authenticity_token
-  before_action :set_urgent_request, only: %i[show edit update destroy]
+  before_action :set_urgent_request, only: %i[show edit update destroy wait_screen check_for_session_start]
   before_action :set_patient
 
   def index
@@ -21,7 +21,12 @@ class UrgentRequestsController < ApplicationController
 
     respond_to do |format|
       if @urgent_request.save
-        format.html { redirect_to patient_urgent_request_path(id: @urgent_request), notice: 'Urgent Request was successfully created.' }
+        format.html do
+          redirect_to(
+            patient_urgent_request_wait_screen_path(urgent_request_id: @urgent_request),
+            notice: 'Urgent Request was successfully created.'
+          )
+        end
         format.json { render :show, status: :created, location: @urgent_request }
       else
         format.html { render :new }
@@ -45,8 +50,38 @@ class UrgentRequestsController < ApplicationController
     end
   end
 
-  def destroy
+  def wait_screen
 
+  end
+
+  def check_for_session_start
+    if @urgent_request.status == 'in_progress'
+      @chat_room = ChatRoom.find_by(urgent_request_id: @urgent_request.id)
+      if @chat_room.present?
+        respond_to do |format|
+          format.html { render plain: '' }
+          format.json do
+            render(
+              json: {
+                address: patient_connect_with_doctor_path(
+                  patient_id: @patient.id,
+                  urgent_request_id: @urgent_request.id
+                )
+              },
+              status: :ok
+            )
+          end
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render plain: '' }
+        format.json { render json: {}, status: :bad_request }
+      end
+    end
+  end
+
+  def destroy
     @urgent_request.destroy
     respond_to do |format|
       format.html { redirect_to patient_urgent_request_path(id: @urgent_request), notice: 'Urgent Request was successfully destroyed.' }
@@ -55,19 +90,18 @@ class UrgentRequestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_urgent_request
-      @urgent_request = UrgentRequest.find(params[:id])
-    end
 
-
+  # Use callbacks to share common setup or constraints between actions.
+  def set_urgent_request
+    @urgent_request = UrgentRequest.find(params[:id].presence || params[:urgent_request_id].presence)
+  end
 
   def set_patient
     @patient = current_user.patient
   end
 
-    # Only allow a list of trusted parameters through.
-    def urgent_request_params
-      params.require(:urgent_request).permit(:patient_id, :description, :media)
-    end
+  # Only allow a list of trusted parameters through.
+  def urgent_request_params
+    params.require(:urgent_request).permit(:patient_id, :description, :media)
+  end
 end
