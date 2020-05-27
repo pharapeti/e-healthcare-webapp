@@ -84,7 +84,7 @@ class UrgentRequestsController < ApplicationController
   def destroy
     @urgent_request.destroy
     respond_to do |format|
-      format.html { redirect_to patient_urgent_request_path(id: @urgent_request), notice: 'Urgent Request was successfully destroyed.' }
+      format.html { redirect_to root_path}
       format.json { head :no_content }
     end
   end
@@ -94,6 +94,8 @@ class UrgentRequestsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_urgent_request
     @urgent_request = UrgentRequest.find(params[:id].presence || params[:urgent_request_id].presence)
+
+    nil unless @urgent_request.present?
   end
 
   def set_patient

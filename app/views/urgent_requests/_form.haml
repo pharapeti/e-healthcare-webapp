@@ -1,3 +1,15 @@
+:coffee
+  $ ->
+    $('.custom-file input').change (e) ->
+      files = []
+      i = 0
+      while i < $(this)[0].files.length
+        files.push $(this)[0].files[i].name
+        i++
+
+      $(this).next('.custom-file-label').html files.join(', ')
+
+
 = bootstrap_form_for @urgent_request, url: patient_urgent_requests_path do |f|
   - if @urgent_request.errors.any?
     #error_explanation
@@ -11,4 +23,4 @@
     = f.file_field :media, required: false
   .actions
     = link_to 'Back', 'javascript:history.back()', class: 'btn btn-info'
-    = f.submit 'Submit urgent request', class: 'btn btn-primary'
+    = f.submit 'Get help', class: 'btn btn-danger'

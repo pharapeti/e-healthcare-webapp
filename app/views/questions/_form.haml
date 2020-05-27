@@ -1,3 +1,14 @@
+:coffee
+  $ ->
+    $('.custom-file input').change (e) ->
+      files = []
+      i = 0
+      while i < $(this)[0].files.length
+        files.push $(this)[0].files[i].name
+        i++
+
+      $(this).next('.custom-file-label').html files.join(', ')
+
 = bootstrap_form_for @question, url: patient_questions_path do |f|
   - if @question.errors.any?
     #error_explanation

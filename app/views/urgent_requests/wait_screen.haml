@@ -16,4 +16,16 @@
       
     checkForSessionStart()
 
-We be waiting
+%h1 Please wait while we connect you to a doctor
+%p
+  %b Description:
+  = @urgent_request.description
+%p
+  %b Attachment:
+  - if @urgent_request.media.attached?
+    = image_tag @urgent_request.media.variant(resize: "400x400")
+  - else
+    No attachments provided
+
+= link_to "I don't need help anymore", patient_urgent_request_path(id: @urgent_request),
+  method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
