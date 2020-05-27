@@ -1,0 +1,13 @@
+%p
+  %b Description:
+  = @transcript.chat_room.request.description     
+%p
+  %b Patient:
+  = @transcript.chat_room.patient.name 
+%p
+  %b Transcript creation time:
+  = @transcript.updated_at.strftime('%d/%m/%y: %H:%M %p')
+%p
+  %b Chat:
+  
+= link_to 'Back', doctor_transcripts_path(current_user.patient), class: 'btn btn-info'
