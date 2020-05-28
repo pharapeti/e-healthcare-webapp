@@ -14,7 +14,7 @@
       %tr
         %td= consultation_request.description
         %td= consultation_request.directed_to.name
-        %td= consultation_request.scheduled_for
+        %td= consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')
         %td= link_to 'Show', patient_consultation_request_path(id: consultation_request)
         %td= link_to 'Edit', edit_patient_consultation_request_path(id: consultation_request)
         %td= link_to 'Destroy', patient_consultation_request_path(id: consultation_request), method: :delete, data: { confirm: 'Are you sure?' }

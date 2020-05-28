@@ -47,6 +47,13 @@ class DoctorsController < ApplicationController
   def profile
   end
 
+  def search
+    render(
+      json: DoctorDatatable.new(params),
+      status: :ok
+    )
+  end
+
   private
 
   def load_doctor

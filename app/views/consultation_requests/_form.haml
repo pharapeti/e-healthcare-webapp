@@ -1,5 +1,7 @@
 :coffee
   $ ->
+    currentSelectedRow = {}
+  
     $('.custom-file input').change (e) ->
       files = []
       i = 0
@@ -8,6 +10,40 @@
         i++
 
       $(this).next('.custom-file-label').html files.join(', ')
+
+    $('#doctors-datatable').dataTable
+      processing: true
+      serverSide: true
+      ajax:
+        url: $('#doctors-datatable').data('source')
+      pagingType: 'full_numbers'
+      language: { search: 'Search by any column:' }
+      columns: [
+        { data: 'license_number' }
+        { data: 'name' }
+        { data: 'practice' }
+        { data: 'address' }
+        { data: 'phone' }
+      ]
+      
+    $('#doctors-datatable').on 'click', 'tbody tr', (e) ->
+      columns = jQuery.makeArray(e.currentTarget.cells);
+      currentSelectedRow = {}
+      
+      $.each columns, (index, column) ->
+        currentSelectedRow[index] = column.textContent
+        
+      $('#consultation_request_directed_to_id').val(currentSelectedRow[1])
+      
+      $('input[type="submit"]').attr('disabled', false)
+      
+
+:sass
+  #practiceSearch
+    max-width: 500px
+
+  .selectedDoctor
+    max-width: 300px
 
 = bootstrap_form_for @consultation_request, url: patient_consultation_requests_path do |f|
   - if @consultation_request.errors.any?
@@ -18,13 +54,25 @@
           %li= message
 
   .field
-    = f.text_area :description
-  .field
-    = f.collection_select :directed_to_id, Doctor.all, :id, :name
+    = f.text_area :description, label: 'Description of your issue or questions'
   .field
     = f.datetime_select :scheduled_for
   .field
     = f.file_field :media, required: false, label: 'Attachment'
+  .field
+    = f.text_field :directed_to_id, label: 'Selected Doctor:', readonly: 'readonly', class: 'selectedDoctor'
   .actions
     = link_to 'Back', patient_consultation_requests_path, class: 'btn btn-danger'
-    = f.submit 'Save', class: 'btn btn-success'
+    = f.submit 'Save', class: 'btn btn-success', disabled: true
+
+%hr
+%table.table.table-hover#doctors-datatable{'data-source': search_doctors_path(format: :json)}
+  %caption#caption You can select a doctor by simply clicking on the row
+  %thead
+    %tr
+      %th License No
+      %th Name
+      %th Practice
+      %th Address
+      %th Phone Number
+  %tbody

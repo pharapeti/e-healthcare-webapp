@@ -12,6 +12,11 @@ Rails.application.routes.draw do
 
   resources :chat_messages
   resources :practices
+
+  resources :doctors do
+    get :search, on: :collection
+  end
+
   resources :license_activations
   resources :prescriptions, controller: 'prescriptions'
 

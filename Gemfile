@@ -29,6 +29,8 @@ gem 'coffee-rails'
 gem "bootstrap_form", "~> 4.0"
 gem 'bootstrap-email'
 gem "mini_magick"
+gem 'ajax-datatables-rails'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

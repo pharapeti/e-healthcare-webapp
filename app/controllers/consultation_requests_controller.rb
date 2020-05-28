@@ -86,7 +86,11 @@ class ConsultationRequestsController < ApplicationController
   def load_doctor
     return unless consultation_request_params['directed_to_id'].present?
 
-    @doctor = Doctor.find_by(id: consultation_request_params['directed_to_id'])
+    @user = User.find_by(username: consultation_request_params['directed_to_id'])
+    raise 'Could not find user' unless @user.present?
+
+    @doctor = Doctor.find_by(user: @user)
+
     raise 'Could not find doctor' unless @doctor.present?
   end
 
