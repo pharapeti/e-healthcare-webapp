@@ -17,7 +17,7 @@ class DoctorChatRoomsController < DoctorsController
     @transcript = Transcript.find_by(chat_room: @chat_room)
     @transcript = Transcript.create(chat_room: @chat_room) if @transcript.blank?
 
-    TranscriptMailer.with(transcript: @transcript).chat_transcript.deliver_now
+    TranscriptMailer.with(transcript: @transcript, send_to: 'doctor').chat_transcript.deliver_now
 
     render json: {}, status: :ok
   end

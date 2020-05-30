@@ -10,6 +10,6 @@ class Patients::TranscriptsController < PatientsController
   end
 
   def generate_transcript
-    TranscriptMailer.with(transcript: @transcript).chat_transcript.deliver_now
+    TranscriptMailer.with(transcript: @transcript, send_to: 'patient').chat_transcript.deliver_now
   end
 end

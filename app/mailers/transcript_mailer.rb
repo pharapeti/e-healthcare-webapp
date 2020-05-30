@@ -2,20 +2,17 @@ class TranscriptMailer < ApplicationMailer
   default from: 'transcripts@ehealth.com'
 
   def chat_transcript
-    return unless params[:transcript].present?
+    return unless params[:transcript].present? && params[:send_to].present?
 
     @transcript = params[:transcript]
-    @doctor_name = nil
 
-    if @transcript.chat_room.request.respond_to?(:directed_to)
-      @doctor_name = @transcript.chat_room.request&.directed_to&.name
-    end
+    send_to =
+      if params[:send_to] == 'doctor'
+        @transcript.chat_room.doctor.user.email
+      else
+        @transcript.chat_room.patient.user.email
+      end
 
-    @subject = @doctor_name.present? ? "Transcript for meeting with #{@doctor_name}" : 'Transcript for meeting'
-
-    make_bootstrap_mail(
-      to: @transcript.chat_room.request.patient.user.email,
-      subject: @subject
-    )
+    make_bootstrap_mail to: send_to, subject: "Transcript for #{send_to}"
   end
 end
