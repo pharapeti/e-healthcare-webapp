@@ -1,3 +1,13 @@
+:coffee
+  $ ->
+    $('#generateTranscript').on 'click', ->
+      $.ajax
+        url: "#{patient_transcript_generate_transcript_path(transcript_id: @transcript.id)}"
+        method: 'GET'
+        dataType: 'json'
+
+%h3 Information
+
 %p
   %b Description:
   = @transcript.chat_room.request.description     
@@ -11,3 +21,4 @@
   %b Chat:
 
 = link_to 'Back', patient_transcripts_path(current_user.patient), class: 'btn btn-primary'
+= link_to 'Generate Transcript', '#', class: 'btn btn-success', id: 'generateTranscript'

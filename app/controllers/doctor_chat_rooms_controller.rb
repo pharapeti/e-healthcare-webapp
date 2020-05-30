@@ -13,9 +13,6 @@ class DoctorChatRoomsController < DoctorsController
     end
   end
 
-  def create
-  end
-
   def send_transcript
     @transcript = Transcript.find_by(chat_room: @chat_room)
     @transcript = Transcript.create(chat_room: @chat_room) if @transcript.blank?
@@ -29,6 +26,9 @@ class DoctorChatRoomsController < DoctorsController
     @chat_room = ChatRoom.find(params[:chat_room_id])
     associated_request = @chat_room.urgent_request.presence || @chat_room.consultation_request
     associated_request.update(status: :finished)
+
+    @transcript = Transcript.find_by(chat_room: @chat_room)
+    @transcript = Transcript.create(chat_room: @chat_room) if @transcript.blank?
 
     ActionCable.server.broadcast "chat_room_channel_#{@chat_room.id}", action: 'end_session'
     redirect_to root_path

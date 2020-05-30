@@ -1,21 +1,21 @@
 - if @transcripts.present?
-  %h3 Your Previous Transcripts
+  %h3 Your Transcripts
   %table.table.table-hover
     %thead
       %tr
         %th Patient
         %th Description
-        %th Transcript creation time 
-        %th 
+        %th Time of session
+        %th
 
     %tbody
       - @transcripts.each do |transcript|
         %tr
           %td= transcript.chat_room.patient.name           
-          %td= transcript.chat_room.request.description         
-          %td= transcript.updated_at.strftime('%d/%m/%y: %H:%M %p')
+          %td= transcript.chat_room.request.description
+          %td= transcript.chat_room.request.created_at.strftime('%d/%m/%y: %H:%M %p')
           %td= link_to 'Show', doctor_transcript_path(id: transcript)
 
 - else
-  %h3 There are no transcripts associated to you
+  %h3 You have not had any consultations
   

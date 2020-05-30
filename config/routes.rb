@@ -30,7 +30,9 @@ Rails.application.routes.draw do
       get :end_session, to: 'patient_chat_rooms#end_session'
     end
     resources :questions
-    resources :transcripts, controller: 'patients/transcripts'
+    resources :transcripts, controller: 'patients/transcripts' do
+      get :generate_transcript
+    end
     resources :consultation_requests, controller: 'consultation_requests'
     resources :urgent_requests, controller: 'urgent_requests' do
       get :wait_screen
@@ -49,7 +51,9 @@ Rails.application.routes.draw do
       post :send_transcript, to: 'doctor_chat_rooms#send_transcript'
       get :end_session, to: 'doctor_chat_rooms#end_session'
     end
-    resources :transcripts, controller: 'doctors/transcripts'
+    resources :transcripts, controller: 'doctors/transcripts' do
+      get :generate_transcript
+    end
     resources :consultation_requests, controller: 'doctors/consultation_request'
     root to: 'doctors#index'
   end
