@@ -1,13 +1,87 @@
-:sass
-  p
-    color: red
-
-%h3
-  Transcript
+:ruby
+  @chat_room = @transcript.chat_room
+  @request = @chat_room.request
+  @chat_messages = @chat_room.chat_messages.order('chat_messages.created_at')
+  @doctor = @chat_room.doctor
+  @patient = @chat_room.patient
   
-%p
-  This is the email transcript that the patient will receive
-%p
-  This email will contain the messages and any other information about the interaction
-%p
-  This includes request information, connection information, list of messages, etc, etc
+  if @request.class == ConsultationRequest
+    @scheduled_for = @request.scheduled_for
+  end
+
+:sass
+  h4
+    color: blue
+    
+  #chat_messages
+    height: 100%
+    overflow-y: scroll
+    padding-top: 20px
+    max-width: 500px
+    
+  .chat-message
+    min-height: 75px
+    .content-container
+      display: inline-block
+      .content
+        background-color: #eeeeee
+        padding: 8px 16px
+        border-radius: 20px
+        max-width: 600px
+        overflow-wrap: break-word
+
+  .chat-message.me
+    min-height: 75px
+    .content-container
+      display: inline-block
+      float: right
+      .content
+        background-color: #007bff
+        color: white
+        padding: 8px 16px
+        border-radius: 20px
+        max-width: 600px
+        overflow-wrap: break-word
+
+%h1 E Health Session Transcript
+%br
+
+%h4 Session information
+%b Doctor
+%p= @doctor.name
+
+%b Patient
+%p= @patient.name
+
+%b Time of session
+%p= @chat_room.created_at.strftime("%-d/%-m/%y: %I:%M %p")
+
+- if @scheduled_for.present?
+  %b Scheduled for
+  %p= @scheduled_for.strftime("%-d/%-m/%y: %I:%M %p")
+
+%b Session type
+%p= @request.class == ConsultationRequest ? 'Consultation' : 'Urgent assistance'
+
+%b Attachment:
+- if @request.media.attached?
+  %br
+  = image_tag @request.media.variant(resize: "200x200")
+  %br
+- else
+  %p No attachment provided
+
+%br
+%h4 Messages
+%i Blue: Patient
+%br
+%i Gray: Doctor
+%br
+#chat_messages
+- @chat_messages.each do |message|
+  - if message.user == @patient.user
+    = render 'chat_messages/mine', chat_message: message
+  - else
+    = render 'chat_messages/theirs', chat_message: message
+
+%b Thank you for using the E Health service

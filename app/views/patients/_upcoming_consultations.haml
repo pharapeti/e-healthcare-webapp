@@ -13,5 +13,5 @@
       %tr
         %td= consultation_request.directed_to.name
         %td= consultation_request.description
-        %td= consultation_request.scheduled_for.strftime('%d/%m/%y: %H:%M %p')
+        %td= consultation_request.scheduled_for.strftime("%-d/%-m/%y: %I:%M %p")
         %td= link_to 'Show', patient_consultation_request_path(id: consultation_request)
