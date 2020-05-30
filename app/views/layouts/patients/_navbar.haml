@@ -8,7 +8,8 @@
       $('#UrgentHelp').attr('data-toggle', 'popover')
       $('#UrgentHelp').attr('data-type', 'button')
       $('#UrgentHelp').attr('data-trigger', 'hover')
-      $('#UrgentHelp').disable()
+      $('#UrgentHelp').attr('href', '#');
+      
 
 :sass
   #UrgentHelp
@@ -31,7 +32,7 @@
   #company-name
     %b E-Health
   
-  - if current_user.patient.in_session?
+  - if current_user.patient.in_session? && !request.path.include?('/connect_with_doctor')
     .in-session-alert
       = link_to 'You are currently in a session with a doctor', current_user.patient.current_session_path
 

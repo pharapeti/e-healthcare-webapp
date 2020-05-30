@@ -20,7 +20,7 @@
   #company-name
     %b E-Health
 
-  - if current_user.doctor.in_session?
+  - if current_user.doctor.in_session? && !request.path.include?('/connect_with_patient')
     .in-session-alert
       = link_to 'You are currently in a session with a patient', current_user.doctor.current_session_path
 
