@@ -72,6 +72,7 @@ ChatMessage.create(chat_room: chat_r_finished, user: patient_user, message: 'I n
 ChatMessage.create(chat_room: chat_r_finished, user: doctor_user1, message: "How's can I help you?")
 ChatMessage.create(chat_room: chat_r_finished, user: patient_user, message: "Actually... don't worry about it")
 ChatMessage.create(chat_room: chat_r_finished, user: doctor_user1, message: 'Ok, see you!')
+Transcript.create(chat_room: chat_r_finished)
 
 
 # URGENT REQUESTS

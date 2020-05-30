@@ -17,8 +17,6 @@
 %p
   %b Transcript creation time:
   = @transcript.updated_at.strftime('%d/%m/%y: %H:%M %p')
-%p
-  %b Chat:
 
 = link_to 'Back', patient_transcripts_path(current_user.patient), class: 'btn btn-primary'
 = link_to 'Generate Transcript', '#', class: 'btn btn-success', id: 'generateTranscript'

@@ -1,3 +1,5 @@
+%h3 About your past consultation
+
 %p
   %b Description:
   = @consultation_request.description
@@ -15,8 +17,13 @@
     No attachments provided
 
 = link_to 'Back', patient_consultation_requests_path(current_user.patient), class: 'btn btn-info'
-= link_to 'Edit', edit_patient_consultation_request_path(id: @consultation_request), class: 'btn btn-primary'
-= link_to 'Cancel', patient_consultation_request_path(id: @consultation_request), method: :delete,
-  data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-= link_to 'Join session',
-  patient_connect_with_doctor_path(consultation_request_id: @consultation_request.id), class: 'btn btn-success'
+- if @consultation_request.status == 'scheduled'
+  = link_to 'Edit', edit_patient_consultation_request_path(id: @consultation_request), class: 'btn btn-primary'
+  = link_to 'Cancel', patient_consultation_request_path(id: @consultation_request), method: :delete,
+    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+- elsif @consultation_request.status == 'finished'
+  = link_to 'View transcript', patient_transcript_path(patient: current_user.patient, transcript_id: @consultation_request.chat_room.transcript&.id),
+    class: 'btn btn-success'
+- if !current_user.patient.in_session?
+  = link_to 'Join session',
+    patient_connect_with_doctor_path(consultation_request_id: @consultation_request.id), class: 'btn btn-success'
