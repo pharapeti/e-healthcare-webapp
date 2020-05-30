@@ -1,8 +1,10 @@
 %h1 Your personalised dashboard
-%br
 
 - if @upcoming_consultations.present?
   = render partial: 'upcoming_consultations'
-%br
+  %br
 - if @unanswered_questions.present?
   = render partial: 'unanswered_questions'
+
+- if @upcoming_consultations.blank? && @unanswered_questions.blank?
+  %i No activity yet

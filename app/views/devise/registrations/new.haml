@@ -18,8 +18,8 @@
       = f.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" }
     .form-actions
       = link_to 'Back', root_path, class: 'btn btn-info'
-      = link_to 'I meant to sign up as a Patient', patient_registration_path, class: 'btn btn-danger' if session[:doctor_id]
-      = link_to 'I meant to sign up as a Doctor', doctor_registration_path, class: 'btn btn-danger' if session[:creating_patient]
+      = link_to 'I actually meant to sign up as a Patient', patient_registration_path,class: 'btn btn-danger' if session[:doctor_id]
+      = link_to 'I actually meant to sign up as a Doctor', doctor_registration_path, class: 'btn btn-danger' if session[:creating_patient]
       = f.button :submit, "Sign up", class: 'btn btn-success'
 - else
   .d-flex.align-content-center.justify-content-center.p-lg-3

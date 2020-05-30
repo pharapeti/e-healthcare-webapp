@@ -1,5 +1,5 @@
 - if @unanswered_questions.present?
-  %h2 Unanswered questions
+  %h3 Unanswered questions
   %table.table.table-hover
     %thead
       %tr
@@ -17,12 +17,12 @@
           %td= link_to 'Answer', new_doctor_answer_path(question_id: question.id)
   %br
 - else
-  %h2 Unanswered questions
+  %h3 Unanswered questions
   %i You have no unanswered questions!
 
 %br
 
-%h2 Questions you have answered
+%h3 Questions you have answered
 %table.table.table-hover
   %thead
     %tr

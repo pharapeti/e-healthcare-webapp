@@ -1,5 +1,6 @@
+%h3 Your Transcripts
+
 - if @transcripts.present?
-  %h3 Your Transcripts
   %table.table.table-hover
     %thead
       %tr
@@ -17,5 +18,5 @@
           %td= link_to 'Show', doctor_transcript_path(id: transcript)
 
 - else
-  %h3 You have not had any consultations
+  %i You have not had any consultations
   

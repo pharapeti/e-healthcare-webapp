@@ -22,7 +22,7 @@
 
   - if current_user.doctor.in_session?
     .in-session-alert
-      %b You are current in a session with a Patient
+      = link_to 'You are currently in a session with a patient', current_user.doctor.current_session_path
 
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.ml-auto.mt-2.mt-lg-0

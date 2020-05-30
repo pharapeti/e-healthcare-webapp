@@ -2,6 +2,13 @@
   $ ->
     $('#company-name, #company-logo').on 'click', ->
       window.location.href = '/'
+      
+    if "#{current_user.patient.in_session?}" == 'true'
+      $('#UrgentHelp').attr('data-content', 'You cannot join another session as you are currently in one.')
+      $('#UrgentHelp').attr('data-toggle', 'popover')
+      $('#UrgentHelp').attr('data-type', 'button')
+      $('#UrgentHelp').attr('data-trigger', 'hover')
+      $('#UrgentHelp').disable()
 
 :sass
   #UrgentHelp
@@ -26,7 +33,7 @@
   
   - if current_user.patient.in_session?
     .in-session-alert
-      %b You are current in a session with a Doctor
+      = link_to 'You are currently in a session with a doctor', current_user.patient.current_session_path
 
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.ml-auto.mt-2.mt-lg-0

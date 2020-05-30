@@ -12,6 +12,7 @@ class UrgentRequestsController < ApplicationController
   end
 
   def new
+    redirect_to root_path and return if @patient.in_session?
     @urgent_request = UrgentRequest.new
   end
 

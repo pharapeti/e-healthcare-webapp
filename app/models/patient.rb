@@ -15,4 +15,21 @@ class Patient < ApplicationRecord
 
     @active_urgent_request.present? || @active_consultation_request.present?
   end
+
+  def current_session_path
+    @active_urgent_request = UrgentRequest.find_by(patient: self, status: :in_progress)
+    @active_consultation_request = ConsultationRequest.find_by(patient: self, status: :in_progress)
+
+    if @active_urgent_request.present?
+      Rails.application.routes.url_helpers.patient_connect_with_doctor_path(
+        patient_id: id,
+        urgent_request_id: @active_urgent_request&.id
+      )
+    elsif @active_consultation_request.present?
+      Rails.application.routes.url_helpers.patient_connect_with_doctor_path(
+        patient_id: id,
+        consultation_request_id: @active_consultation_request&.id
+      )
+    end
+  end
 end
