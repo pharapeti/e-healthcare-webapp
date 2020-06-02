@@ -18,6 +18,9 @@ practice3 = Practice.create(name: 'Campbelltown Personal Health', phone: '985048
 Practice.create(name: 'Campbelltown Hospital', phone: '98335201', address: '99 Marley Way, Sydney')
 Practice.create(name: 'Price Alfred Hospital', phone: '99804832', address: '12 Jason Parade, Sydney')
 
+
+LicenseActivation.create(license_number: 'BBL130', code: 'abc123', practice: practice2)
+
 redeemed_license_activation = LicenseActivation.create(license_number: 'KLJ45', code: 'xyz123', redeemed: true, redeemed_at: 1.week.ago, practice: practice1)
 valid_license_action = LicenseActivation.create(license_number: 'JBL999', code: 'abc123', practice: practice1)
 doctor = Doctor.create(user: doctor_user1, license_activation: redeemed_license_activation, practice: practice1)
@@ -42,21 +45,21 @@ ConsultationRequest.create(
   scheduled_for: 1.week.from_now, status: :scheduled
 )
 
-# in progress
-consultation_request_ip =
-  ConsultationRequest.create(
-    patient: patient, directed_to: doctor, description: 'Just wanted to have my daily checkup with you',
-    scheduled_for: 1.week.from_now, status: :in_progress
-  )
-
-chat_room_ip = ChatRoom.create(consultation_request: consultation_request_ip, patient: patient, doctor: doctor)
-ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'Hi there doctor')
-ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: 'Hello!')
-ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'I need help')
-ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: "How's can I help you?")
-ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: "Actually... don't worry about it")
-ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: 'Ok, see you!')
-Transcript.create(chat_room: chat_room_ip)
+# # in progress
+# consultation_request_ip =
+#   ConsultationRequest.create(
+#     patient: patient, directed_to: doctor, description: 'Just wanted to have my daily checkup with you',
+#     scheduled_for: 1.week.from_now, status: :in_progress
+#   )
+#
+# chat_room_ip = ChatRoom.create(consultation_request: consultation_request_ip, patient: patient, doctor: doctor)
+# ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'Hi there doctor')
+# ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: 'Hello!')
+# ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: 'I need help')
+# ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: "How's can I help you?")
+# ChatMessage.create(chat_room: chat_room_ip, user: patient_user, message: "Actually... don't worry about it")
+# ChatMessage.create(chat_room: chat_room_ip, user: doctor_user1, message: 'Ok, see you!')
+# Transcript.create(chat_room: chat_room_ip)
 
 # completed
 cr_finished =
@@ -91,12 +94,12 @@ ChatMessage.create(chat_room: chat_room_finished, user: patient_user, message: "
 ChatMessage.create(chat_room: chat_room_finished, user: doctor_user1, message: 'Ok, see you!')
 Transcript.create(chat_room: chat_room_finished)
 
-# Attachments
-consultation_request_ip.media.attach(
-  io: File.open('app/assets/images/test_images/neck_pain.jpg'),
-  filename: 'neck_pain.jpg',
-  content_type: 'image/jpg'
-)
+# # Attachments
+# consultation_request_ip.media.attach(
+#   io: File.open('app/assets/images/test_images/neck_pain.jpg'),
+#   filename: 'neck_pain.jpg',
+#   content_type: 'image/jpg'
+# )
 
 cr_finished.media.attach(
   io: File.open('app/assets/images/test_images/leg_pain.jpg'),

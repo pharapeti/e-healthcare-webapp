@@ -16,13 +16,13 @@
       %ul
         - @question.errors.full_messages.each do |message|
           %li= message
-
+  
   .field
-    = f.file_field :media, required: false
+    = f.text_area :description, required: true
   .field
     = f.collection_select :directed_to_id, Doctor.all, :id, :name
   .field
-    = f.text_area :description, required: true
+    = f.file_field :media, required: false
   .actions
     = link_to 'Back', patient_questions_path(@patient), class: 'btn btn-info'
     = f.submit 'Submit question', class: 'btn btn-primary'
